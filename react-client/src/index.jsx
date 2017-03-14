@@ -2,15 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
+import Nav from './components/Nav.jsx';
+import Message from './components/Message.jsx'
+import SoundIcon from './components/SoundIcon.jsx'
+import Inputs from './components/Inputs.jsx'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: []
+
     }
   }
-
+/*
   componentDidMount() {
     $.ajax({
       url: '/items', 
@@ -24,11 +28,13 @@ class App extends React.Component {
       }
     });
   }
+*/
 
   render () {
     return (<div>
-      <h1>Item List</h1>
-      <List items={this.state.items}/>
+      <Nav />
+      <h1>Quoted</h1>
+      <Inputs />
     </div>)
   }
 }

@@ -32119,10 +32119,13 @@ var Message = function (_React$Component) {
     key: 'handleChange',
     value: function handleChange(e) {
       this.setState({ input: e.target.value });
+      console.log(e.target.value);
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'div',
         { className: 'form-group' },
@@ -32134,7 +32137,9 @@ var Message = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'col-md-8' },
-          _react2.default.createElement('textarea', { className: 'form-control', rows: '8', id: 'textArea' }),
+          _react2.default.createElement('textarea', { className: 'form-control', rows: '8', id: 'textArea', onChange: function onChange(e) {
+              _this2.handleChange(e);
+            } }),
           _react2.default.createElement(
             'span',
             { className: 'help-block' },

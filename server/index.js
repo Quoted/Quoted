@@ -1,11 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var items = require('../database-mongo');
+var handler = require('./request-handler');
 //Twillio Requirements
 var twilioKeys = require('../twilio_api');
-//Yelp
-var yelp = require('./yelp');
-
 
 var app = express();
 
@@ -18,7 +16,6 @@ var client = require('twilio')(accountSid, authToken);
 
 // UNCOMMENT FOR REACT
 app.use(express.static(__dirname + '/../react-client/dist'));
-
 
 
 app.post('/messages', function(req, res) {
@@ -38,6 +35,7 @@ app.post('/messages', function(req, res) {
   });
 });
 
+app.get('/businesses', handler.checkBusinessData); 
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');

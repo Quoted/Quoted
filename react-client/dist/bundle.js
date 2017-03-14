@@ -9437,12 +9437,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 module.exports = ReactPropTypesSecret;
 
 /***/ }),
-/* 80 */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/mikeliao/Desktop/HackReactor/Course/Quoted/react-client/src/components/List.jsx'");
-
-/***/ }),
+/* 80 */,
 /* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31930,10 +31925,6 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 var _jquery = __webpack_require__(81);
 
 var _jquery2 = _interopRequireDefault(_jquery);
-
-var _List = __webpack_require__(80);
-
-var _List2 = _interopRequireDefault(_List);
 
 var _Nav = __webpack_require__(181);
 

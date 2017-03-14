@@ -12,7 +12,7 @@ class SoundIcon extends React.Component {
 
   render() {
     return (            
-      <img className="col-sm-3" src="assets/soundIcon.png" />  
+      <img  src="assets/soundIcon.png" />  
     )
   }
 }

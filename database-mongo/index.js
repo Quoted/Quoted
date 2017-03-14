@@ -20,7 +20,8 @@ var businessSchema = mongoose.Schema({
   BusinessPhone: Number,
   BusinessCell: Number,
   BusinessEmail: String,
-  BusinessPicture: String
+  BusinessPicture: String,
+  BusinessType: String
 });
 
 var userSchema = mongoose.Schema({
@@ -38,8 +39,7 @@ var userSchema = mongoose.Schema({
 var Business = mongoose.model('Business', businessSchema);
 var Users = mongoose.model('Users', userSchema);
 
-
-var selectAll = function(callback) {
+module.exports.selectAllBusinesses = function(callback) {
   Business.find({}, function(err, items) {
     if(err) {
       callback(err, null);
@@ -49,4 +49,5 @@ var selectAll = function(callback) {
   });
 };
 
-module.exports.selectAll = selectAll;
+
+module.exports.Business = Business;

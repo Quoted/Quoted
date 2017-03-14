@@ -12,6 +12,7 @@ class Message extends React.Component {
 
   handleChange(e) {
     this.setState({input: e.target.value});
+    console.log(e.target.value);
   }
 
   render() {
@@ -19,7 +20,7 @@ class Message extends React.Component {
       <div className="form-group">
       <label for="textArea" className="col-lg-2 control-label">Message</label>
       <div className="col-md-8">
-        <textarea className="form-control" rows="8" id="textArea"></textarea>
+        <textarea className="form-control" rows="8" id="textArea" onChange={(e) => {this.handleChange(e)}}></textarea>
         <span className="help-block">Enter your text message here</span>
       </div>
       </div> 

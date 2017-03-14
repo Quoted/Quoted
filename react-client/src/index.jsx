@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import List from './components/List.jsx';
 import Nav from './components/Nav.jsx';
 import Message from './components/Message.jsx'
 import SoundIcon from './components/SoundIcon.jsx'

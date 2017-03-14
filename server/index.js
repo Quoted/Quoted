@@ -1,8 +1,11 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-var twilioKeys = require('../twilio_api');
 var items = require('../database-mongo');
+//Twillio Requirements
+var twilioKeys = require('../twilio_api');
+//Yelp
+var yelp = require('./yelp');
+
 
 var app = express();
 

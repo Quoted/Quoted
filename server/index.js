@@ -29,7 +29,7 @@ app.post('/messages', function(req, res) {
         client.messages.create({
           to: biz.BusinessCell,
           from: '4152001619',
-          body: 'Test message, hello ' + biz.BusinessName +  ' Han wants to spam you',
+          body: 'Hey ' + biz.BusinessName +  ' this is Billy! I want to SPAM you!',
         }, function (err, message) {
           if (err) {
             console.log('err', err);

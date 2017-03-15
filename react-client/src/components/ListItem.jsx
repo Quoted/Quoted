@@ -18,7 +18,8 @@ class ListItem extends React.Component {
   render() {
     return (            
       <div className="listItem container-fluid">
-        <div> Hello I am a List Item </div>
+        <div> Name: {this.props.name}</div>
+        <div> Phone: {this.props.phone}</div>
       </div> 
     )
   }

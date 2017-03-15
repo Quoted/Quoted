@@ -20,7 +20,8 @@ var businessSchema = mongoose.Schema({
   BusinessPhone: Number,
   BusinessCell: Number,
   BusinessEmail: String,
-  BusinessPicture: String
+  BusinessPicture: String,
+  Category: String
 });
 
 var userSchema = mongoose.Schema({
@@ -38,6 +39,44 @@ var userSchema = mongoose.Schema({
 var Business = mongoose.model('Business', businessSchema);
 var Users = mongoose.model('Users', userSchema);
 
+// Clear the test data
+Business.remove({}, function(err, biz) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('successfully removed');
+  }
+});
+
+// add test data
+Business.create({
+  BusinessName: "Edwin",
+  BusinessCell: 7703357571,
+  Category: "test"
+}, function(err, data) {
+  console.log('saved');
+});
+Business.create({
+  BusinessName: "Han",
+  BusinessCell: 5104568837,
+  Category: "test"
+}, function(err, data) {
+  console.log('saved');
+});
+Business.create({
+  BusinessName: "Mike",
+  BusinessCell: 4083182027,
+  Category: "test"
+}, function(err, data) {
+  console.log('saved');
+});
+Business.create({
+  BusinessName: "Jason",
+  BusinessCell: 6267168334,
+  Category: "test"
+}, function(err, data) {
+  console.log('saved');
+});
 
 var selectAll = function(callback) {
   Business.find({}, function(err, items) {
@@ -49,4 +88,4 @@ var selectAll = function(callback) {
   });
 };
 
-module.exports.selectAll = selectAll;
+module.exports.Business = Business;

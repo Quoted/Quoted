@@ -21,7 +21,7 @@ var businessSchema = mongoose.Schema({
   BusinessCell: Number,
   BusinessEmail: String,
   BusinessPicture: String,
-  Category: String
+  Category: String,
   BusinessType: String
 
 });

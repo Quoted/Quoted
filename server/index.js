@@ -29,7 +29,7 @@ app.post('/messages', function(req, res) {
         client.messages.create({
           to: biz.BusinessCell,
           from: '4152001619',
-          body: 'Test message, hello ' + biz.BusinessName +  ' how are you -Han',
+          body: 'Test message, hello ' + biz.BusinessName +  ' Han wants to spam you',
         }, function (err, message) {
           if (err) {
             console.log('err', err);
@@ -45,7 +45,7 @@ app.post('/messages', function(req, res) {
   // This is how to do a basic send message from twilio 
   // where the 770 num is a verified number that is like a biz number 
   // and the 415 number is a twilio number
-  
+
   // client.messages.create({
   //     to: '7703357571',
   //     from: '4152001619',
@@ -59,6 +59,35 @@ app.post('/messages', function(req, res) {
   //       res.status(200).send();
   //     }
   // });
+});
+
+
+app.post('/call', function(req, res) {
+  console.log('trying to send out text messages'); 
+  Business.find({Category: "test"}, function(err, businesses){
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('test businesses', businesses);
+      businesses.forEach(function(biz) {
+        client.calls.create({
+          url: 'http://demo.twilio.com/docs/voice.xml',
+          to: biz.BusinessCell,
+          from: '4152001619',
+          // body: 'Test message, hello ' + biz.BusinessName +  ' Han wants to spam you',
+        }, function (err, message) {
+          if (err) {
+            console.log('err', err);
+            res.status(404).end();
+          } else {
+            // console.log('message sid', message.sid);
+            process.stdout.write(calls.sid);
+            res.status(200).send();
+          }
+        });
+      });
+    }
+  });
 });
 
 

@@ -34,17 +34,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.post('/messages', function(req, res) {
-  console.log('trying to send out text messages'); 
+  console.log('getting response from client'); 
+  console.log('req body', req.body);
+  var textInput = req.body.textInput
+  console.log('textInput', textInput);
+
   Business.find({Category: "test"}, function(err, businesses){
     if (err) {
       console.log(err);
     } else {
-      console.log('test businesses', businesses);
+      // console.log('test businesses', businesses);
       businesses.forEach(function(biz) {
+        console.log('business phone', biz.BusinessPhone);
         client.messages.create({
-          to: biz.BusinessCell,
+          to: biz.BusinessPhone,
           from: '4152001619',
-          body: 'Hey ' + biz.BusinessName +  ' this is Billy! I want to SPAM you!',
+          body: 'Hey ' + biz.BusinessName +  'I want to let you know that :' + textInput
         }, function (err, message) {
           if (err) {
             console.log('err', err);
@@ -57,6 +62,7 @@ app.post('/messages', function(req, res) {
       });
     }
   });
+  
   // This is how to do a basic send message from twilio 
   // where the 770 num is a verified number that is like a biz number 
   // and the 415 number is a twilio number

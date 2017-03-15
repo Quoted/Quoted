@@ -27,7 +27,9 @@ yelp.search({ term: 'auto', location: 'San Francisco' })
   businesses.forEach((business) => {
   	Business.create({
 			BusinessName: business.name,
-			BusinessPhone: business.phone		
+			BusinessPhone: business.phone,	
+      Category: 'NOT YET IMPLEMENTED'
+      //Enter the Categor
   	}).then(function(result) {
       console.log('built', result);
     });

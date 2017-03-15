@@ -14,10 +14,12 @@ class Inputs extends React.Component {
 
   render() {
     return (                  
-      <div> 
-        <Message /> 
-        <SoundIcon />        
-        <h1> Confirm info </h1>
+      <div className="row inputs"> 
+        <div className="col-sm-10">
+          <Message />         
+          <SoundIcon />        
+          <button className="btn btn-primary"> Confirm info </button>
+          </div>
       </div>
     )
   }

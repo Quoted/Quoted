@@ -22,6 +22,8 @@ var businessSchema = mongoose.Schema({
   BusinessEmail: String,
   BusinessPicture: String,
   Category: String
+  BusinessType: String
+
 });
 
 var userSchema = mongoose.Schema({
@@ -38,6 +40,7 @@ var userSchema = mongoose.Schema({
 
 var Business = mongoose.model('Business', businessSchema);
 var Users = mongoose.model('Users', userSchema);
+
 
 // Clear the test data
 Business.remove({}, function(err, biz) {
@@ -89,3 +92,5 @@ var selectAll = function(callback) {
 };
 
 module.exports.Business = Business;
+
+

@@ -17,10 +17,10 @@ class Message extends React.Component {
 
   render() {
     return (            
-      <div className="form-group">
-      <label for="textArea" className="col-lg-2 control-label">Message</label>
-      <div className="col-md-8">
-        <textarea className="form-control" rows="8" id="textArea" onChange={(e) => {this.handleChange(e)}}></textarea>
+      <div className="form-group message">
+      <label for="textArea" className="col-lg-4 control-label">Message</label>
+      <div >
+        <textarea className="form-control col-md-8" rows="8" id="textArea" onChange={(e) => {this.handleChange(e)}}></textarea>
         <span className="help-block">Enter your text message here</span>
       </div>
       </div> 

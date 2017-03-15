@@ -1,9 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-var twilioKeys = require('../twilio_api');
 var items = require('../database-mongo');
+
 var Business = require('../database-mongo/index').Business;
+var handler = require('./request-handler');
+//Twillio Requirements
+var twilioKeys = require('../twilio_api');
+
 
 var app = express();
 
@@ -13,10 +16,11 @@ var authToken = twilioKeys.authToken;
 //require the Twilio module and create a REST client
 
 var client = require('twilio')(accountSid, authToken);
-
-// UNCOMMENT FOR REACT
 app.use(express.static(__dirname + '/../react-client/dist'));
-
+// parse application/x-www-form-urlencoded 
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json 
+app.use(bodyParser.json());
 
 app.post('/messages', function(req, res) {
   console.log('trying to send out text messages'); 
@@ -90,6 +94,7 @@ app.post('/call', function(req, res) {
   });
 });
 
+app.get('/businesses', handler.checkBusinessData); 
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');

@@ -32338,15 +32338,26 @@ var SoundIcon = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (SoundIcon.__proto__ || Object.getPrototypeOf(SoundIcon)).call(this, props));
 
-    _this.state = {};
+    _this.state = {
+      listening: false
+    };
 
     return _this;
   }
 
   _createClass(SoundIcon, [{
+    key: 'handlePress',
+    value: function handlePress() {
+      this.setState({ listening: !this.state.listening });
+    }
+  }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement('img', { src: 'assets/soundIcon.png' });
+      var style = {
+        'backgroundColor': this.state.listening ? 'green' : ''
+      };
+
+      return _react2.default.createElement('img', { style: style, onClick: this.handlePress.bind(this), src: 'assets/soundIcon.png' });
     }
   }]);
 

@@ -6,13 +6,22 @@ class SoundIcon extends React.Component {
     super(props);
 
     this.state = {
+      listening: false
     };
 
   }
 
+  handlePress() {
+    this.setState({listening: !this.state.listening})
+  }
+
   render() {
+    var style = {            
+      'backgroundColor': this.state.listening ? 'green': ''
+    };
+
     return (            
-      <img  src="assets/soundIcon.png" />  
+      <img style={style} onClick={this.handlePress.bind(this)} src="assets/soundIcon.png" />  
     )
   }
 }

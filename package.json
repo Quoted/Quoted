@@ -6,7 +6,7 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "start": "node server/index.js" 
+    "start": "node server/index.js"
   },
   "author": "Beth Johnson",
   "license": "ISC",
@@ -20,6 +20,7 @@
   "dependencies": {
     "angular": "^1.6.3",
     "bcrypt": "^1.0.2",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",
     "crypto-js": "^3.1.9-1",
@@ -34,6 +35,6 @@
     "react-dom": "^15.4.2",
     "request": "^2.81.0",
     "twilio": "^2.11.1",
-    "yelp": "^1.0.2"
+    "yelp": "^1.0l2"
   }
 }

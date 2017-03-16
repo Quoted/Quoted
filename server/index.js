@@ -77,17 +77,22 @@ app.post('/businesses', handler.checkBusinessData);
 
 
 app.post('/messages', function(req, res) {
-  console.log('trying to send out text messages'); 
+  console.log('getting response from client'); 
+  console.log('req body', req.body);
+  var textInput = req.body.textInput
+  console.log('textInput', textInput);
+
   Business.find({Category: "test"}, function(err, businesses){
     if (err) {
       console.log(err);
     } else {
-      console.log('test businesses', businesses);
+      // console.log('test businesses', businesses);
       businesses.forEach(function(biz) {
+        console.log('business phone', biz.BusinessPhone);
         client.messages.create({
-          to: biz.BusinessCell,
+          to: biz.BusinessPhone,
           from: '4152001619',
-          body: 'Hey ' + biz.BusinessName +  ' this is Billy! I want to SPAM you!',
+          body: 'Hey ' + biz.BusinessName +  'I want to let you know that :' + textInput
         }, function (err, message) {
           if (err) {
             console.log('err', err);
@@ -103,7 +108,7 @@ app.post('/messages', function(req, res) {
 
 });
 
-
+/*
 app.post('/call', function(req, res) {
   console.log('trying to send out text messages'); 
   Business.find({Category: "test"}, function(err, businesses){
@@ -111,43 +116,80 @@ app.post('/call', function(req, res) {
       console.log(err);
     } else {
       console.log('test businesses', businesses);
-      businesses.forEach(function(biz) { // UNCOMMENT
-        app.currentBusiness = biz;
-/// Set params in post request for url        
+      businesses.forEach(function(biz) {
+        console.log('calling people at this number', biz.BusinessPhone);
         client.calls.create({
-          // url: 'http://demo.twilio.com/docs/voice.xml',
-          url: 'https://0eee99e4.ngrok.io/voice',
-          // url: 'https://0eee99e4.ngrok.io/Edwin',
-          to: biz.BusinessCell, // UNCOMMENT
-          // to: '7703357571',
+          url: 'http://580709ae.ngrok.io/voice',
+          to: biz.BusinessPhone,
           from: '4152001619',
-        }, function (err, call) {
+          body: 'Test message, hello ' + biz.BusinessName +  ' Han wants to spam you',
+        }, function (err, message) {
           if (err) {
-            console.log(err);
-            // res.status(404).end();
+            console.log('err', err);            
+            res.status(404).end();
           } else {
             // console.log('message sid', message.sid);
-            // process.stdout.write(call.sid);
-            console.log(call.sid);
-            process.stdout.write(call.sid);
-            // res.status(200).send(call.sid);
+            console.log('message', message);
+            process.stdout.write(calls.sid);
+            res.status(200).send();
           }
         });
-        setTimeout(() => {}, 1000);
-        console.log('another business', app.currentBusiness.BusinessName);
-      }); //UNCOMMENT
+      });
     }
   });
 });
+*/
 
-
-app.post('/voice', function(req, res) {
+app.post('/voice', function(req, res) {  
   var twiml = new twilio.TwimlResponse();
   // console.log('request', req.body);
+  console.log('request', req);
+  console.log('request body', req.body);
+  console.log('currentName', app.currentBusiness.BusinessName);
   twiml.say('Hey ' + app.currentBusiness.BusinessName + ' Hash tag party! From bros');
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
-  // res.end(req);
+});
+
+
+
+
+function Iterator(businesses, index, callback) {
+  try {
+    var biz = businesses[index];
+    app.currentBusiness = biz;
+    // console.log('biz', biz);
+    client.calls.create({
+        url: 'http://580709ae.ngrok.io/voice',
+        to: biz.BusinessPhone,
+        from: '4152001619',
+        name: 'fdsfsafadsf'             
+    }, function(err, message) {
+      index++; //increment the index
+      if (index >= businesses.length) {
+        callback();
+      } else {
+        // console.log('index', index);
+        // console.log('businesses', businesses);
+        Iterator(businesses, index, callback);
+      }
+    })
+  } catch(e) {
+    console.log('caught some error:', e);
+  }
+}
+
+
+app.post('/call', function(req, res) {
+  Business.find({Category: "test"}, function(err, businesses){
+    if (err) {
+      console.log(err);
+    } else {      
+      Iterator(businesses, 0, function() {
+        res.end('finshed calling everyone');
+      })
+    }
+  });
 });
 
 

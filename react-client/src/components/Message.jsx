@@ -10,17 +10,17 @@ class Message extends React.Component {
 
   }
 
-  handleChange(e) {
-    this.setState({input: e.target.value});
-    console.log(e.target.value);
-  }
+  // handleChange(e) {
+  //   this.setState({input: e.target.value});
+  //   console.log(e.target.value);
+  // }
 
   render() {
     return (            
       <div className="form-group message">
       <label for="textArea" className="col-lg-4 control-label">Message</label>
       <div >
-        <textarea className="form-control col-md-8" rows="8" id="textArea" onChange={(e) => {this.handleChange(e)}}></textarea>
+        <textarea className="form-control col-md-8" rows="8" id="textArea" onChange={(e) => {this.props.handleTextChange(e)}}></textarea>
         <span className="help-block">Enter your text message here</span>
       </div>
       </div> 

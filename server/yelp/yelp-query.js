@@ -20,7 +20,6 @@ yelp.queryApi = function(obj) {
     yelp.search(obj)
     .then(function (data) {
       var businesses = data.businesses;
-
       businesses.forEach((business) => {
         Business.create({
           businessName: business.name,
@@ -35,6 +34,7 @@ yelp.queryApi = function(obj) {
     })
     .catch(function (err) {
       console.error(err);
+
     });
   })
 };

@@ -19,20 +19,25 @@ exports.checkBusinessData = function(req, res) {
 	var geolocationLat = req.body.geolocationLat;
 	var geolocationLong = req.body.geolocationLong;	
 
+
+
+  //To put filters in late
 	// Business.find({"businessType": category, "businessCity": location})
-	Business.find({"businessCity": location})	
+  // Business.find({"businessCity": 'San Francisco'}) 
+  Business.find({})
 		.exec(function(err, result) {
+      console.log(result);
 			if (err) {
           res.status(500).send("Something unexpected horrendeously happened"); 	
 			} else {
-				if( result.length <= 5) {
+				if( result.length <= 2) {
 					yelp.queryApi({ 'term': term, 'location': location })
 					.then(function(results) {
 						res.json(results);
 					});
-				}
-				res.json(result);				
+				}							
 			}
+      res.json(result); 
 		});
 };
 

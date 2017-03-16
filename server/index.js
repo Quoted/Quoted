@@ -18,7 +18,10 @@ var client = require('twilio')(accountSid, authToken);
 
 var app = express();
 
-app.currentBusiness = {BusinessName: 'Ice Cream Truck'};
+
+//Deployement ports
+app.set('port', (process.env.PORT || 3000));
+
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 
@@ -61,7 +64,7 @@ app.post('/user/signup', handler.userSignUp);
 app.post('/user/login', handler.userLogin);
 
 app.post('/businesses', handler.checkBusinessData); 
-// app.get('/businesses', handler.checkBusinessData); 
+app.get('/businesses', handler.checkBusinessData); 
 
 app.post('/messages', function(req, res) {
   console.log('getting response from client'); 
@@ -72,22 +75,23 @@ app.post('/messages', function(req, res) {
 
 
 
-  Business.find({Category: "test"}, function(err, businesses){
+  Business.find({businessType: "test"}, function(err, businesses){
     if (err) {
       console.log(err);
     } else {
       // console.log('test businesses', businesses);
       businesses.forEach(function(biz) {
-        console.log('business phone', biz.BusinessPhone);
+        console.log('business phone', biz.businessPhone);
         client.messages.create({
-          to: biz.BusinessPhone,
+          to: biz.businessPhone,
           from: '4152001619',
-          body: 'Hey ' + biz.BusinessName +  'I want to let you know that :' + textInput
+          body: 'Hey ' + biz.businessName +  'I want to let you know that :' + textInput
         }, function (err, message) {
           if (err) {
             console.log('err', err);
             res.status(404).end();
           } else {
+            console.log('sent message!!!!!');
             console.log('message sid', message.sid);
             res.status(200).send();
           }
@@ -98,15 +102,13 @@ app.post('/messages', function(req, res) {
 
 });
 
-
-
+/*
 app.post('/voice', function(req, res) {  
   var twiml = new twilio.TwimlResponse();
   // console.log('request', req.body);
   console.log('request', req);
   console.log('request body', req.body);
-  console.log('currentName', app.currentBusiness.BusinessName);
-  twiml.say('Hey ' + app.currentBusiness.BusinessName + ' Hash tag party! From bros');
+  twiml.say('Hey ${insert name here} Hash tag party! From bros');
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
 });
@@ -119,7 +121,7 @@ function Iterator(businesses, index, callback) {
     // console.log('biz', biz);
     client.calls.create({
         url: 'http://580709ae.ngrok.io/voice',
-        to: biz.BusinessPhone,
+        to: biz.businessPhone,
         from: '4152001619',
         name: 'fdsfsafadsf'             
     }, function(err, message) {
@@ -138,7 +140,7 @@ function Iterator(businesses, index, callback) {
 }
 
 app.post('/call', function(req, res) {
-  Business.find({Category: "test"}, function(err, businesses){
+  Business.find({businessType: "test"}, function(err, businesses){
     if (err) {
       console.log(err);
     } else {      
@@ -148,9 +150,11 @@ app.post('/call', function(req, res) {
     }
   });
 });
+*/
 
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
+
+app.listen(app.get('port'), function() {
+  console.log('listening on on port:' + app.get('port'));
 });
 

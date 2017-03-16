@@ -22,7 +22,6 @@ class List extends React.Component {
     $.get({
       url: '/businesses',      
       success: (results) => {
-        results = JSON.parse(results);                
         this.setState({businesses: results});
       }, error: (err) => {
         console.log('err', err);
@@ -44,11 +43,10 @@ class List extends React.Component {
         {
           
           this.state.businesses.map((business) => {
-            return <ListItem phone={business.BusinessPhone} name={business.BusinessName} />
+            return <ListItem phone={business.businessPhone} name={business.businessName} />
           })
         }
-        <button onClick={this.fetchBusinesses.bind(this)} /> Hello <button />
-      </div>
+        <button onClick={this.fetchBusinesses.bind(this)} /> Refresh       </div>
 
     )
 

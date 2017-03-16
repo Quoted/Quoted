@@ -1,35 +1,30 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var items = require('../database-mongo');
-
-var Business = require('../database-mongo/index').Business;
-
+var Business = require('../database-mongo/models/business.js');
 var twilio = require('twilio');
-
 var handler = require('./request-handler');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var path = require('path');
 
 //Twillio Requirements
-// var twilioKeys = require('../twilio_api');
-var app = express();
-
+var twilioKeys = require('../twilio_api');
 // // Twilio Credentials Move somewhere else later
-// var accountSid = twilioKeys.accountSid; 
-// var authToken = twilioKeys.authToken;
+var accountSid = twilioKeys.accountSid; 
+var authToken = twilioKeys.authToken;
 //require the Twilio module and create a REST client
 var client = require('twilio')(accountSid, authToken);
 
-
+var app = express();
 
 app.currentBusiness = {BusinessName: 'Ice Cream Truck'};
 
 app.use(express.static(__dirname + '/../react-client/dist'));
-// parse application/x-www-form-urlencoded 
+
 app.use(bodyParser.urlencoded({ extended: true }));
-// parse application/json 
 app.use(bodyParser.json());
+
 app.use(cookieParser('Greenfie1dBr0s'));
 app.use(session({
   secret: 'Greenfie1dBr0s',
@@ -38,10 +33,7 @@ app.use(session({
 }));
 
 
-app.get('/user', function(req, res){
-  console.log('req body: ', req.body);
-  console.log('cookies: ', req.cookies);
-  console.log('session: ', req.session);  
+app.get('/user', function(req, res){ 
   var sessionCheck = req.session ? !!req.session.username : false;
   if (sessionCheck) {
     res.json(req.session.user);
@@ -49,8 +41,6 @@ app.get('/user', function(req, res){
     res.json(null);
   }
 });
-
-
 
 app.post('/user', function(req, res){
   console.log('req ', req);
@@ -66,21 +56,21 @@ app.post('/user', function(req, res){
   }
 });
 
-//MIKE THIS ISN'T DONE
-// app.get('/', handler.getUserSession);
-
-//BELOW IS OKAY
 app.get('/user/logout', handler.userLogout);
 app.post('/user/signup', handler.userSignUp);
 app.post('/user/login', handler.userLogin);
-app.post('/businesses', handler.checkBusinessData); 
 
+app.post('/businesses', handler.checkBusinessData); 
+// app.get('/businesses', handler.checkBusinessData); 
 
 app.post('/messages', function(req, res) {
   console.log('getting response from client'); 
   console.log('req body', req.body);
   var textInput = req.body.textInput
   console.log('textInput', textInput);
+
+
+
 
   Business.find({Category: "test"}, function(err, businesses){
     if (err) {
@@ -108,37 +98,7 @@ app.post('/messages', function(req, res) {
 
 });
 
-/*
-app.post('/call', function(req, res) {
-  console.log('trying to send out text messages'); 
-  Business.find({Category: "test"}, function(err, businesses){
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('test businesses', businesses);
-      businesses.forEach(function(biz) {
-        console.log('calling people at this number', biz.BusinessPhone);
-        client.calls.create({
-          url: 'http://580709ae.ngrok.io/voice',
-          to: biz.BusinessPhone,
-          from: '4152001619',
-          body: 'Test message, hello ' + biz.BusinessName +  ' Han wants to spam you',
-        }, function (err, message) {
-          if (err) {
-            console.log('err', err);            
-            res.status(404).end();
-          } else {
-            // console.log('message sid', message.sid);
-            console.log('message', message);
-            process.stdout.write(calls.sid);
-            res.status(200).send();
-          }
-        });
-      });
-    }
-  });
-});
-*/
+
 
 app.post('/voice', function(req, res) {  
   var twiml = new twilio.TwimlResponse();
@@ -150,8 +110,6 @@ app.post('/voice', function(req, res) {
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
 });
-
-
 
 
 function Iterator(businesses, index, callback) {
@@ -179,7 +137,6 @@ function Iterator(businesses, index, callback) {
   }
 }
 
-
 app.post('/call', function(req, res) {
   Business.find({Category: "test"}, function(err, businesses){
     if (err) {
@@ -191,10 +148,6 @@ app.post('/call', function(req, res) {
     }
   });
 });
-
-
-app.get('/businesses', handler.checkBusinessData); 
-
 
 
 app.listen(3000, function() {

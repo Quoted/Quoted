@@ -5,7 +5,6 @@ var Users = require('../database-mongo/models/user.js');
 var crypto = require('crypto');
 var bcrypt = require('bcrypt-nodejs');
 var yelp = require('./yelp/yelp-query.js');
-// var Business = require('../database-mongo/index.js').Business;
 
 
 exports.createSalt = function() {
@@ -79,10 +78,6 @@ exports.userLogin = function(req, res) {
 			}
 		});
 };
-
-// exports.getUserSession = function(req, res) {
-// 	var checkSession = req.session ? 
-// };
 
 exports.userLogout = function(req, res) {
 	req.session.destroy(function() {

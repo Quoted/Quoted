@@ -9503,7 +9503,6 @@ var List = function (_React$Component) {
       _jquery2.default.get({
         url: '/businesses',
         success: function success(results) {
-          results = JSON.parse(results);
           _this2.setState({ businesses: results });
         }, error: function error(err) {
           console.log('err', err);
@@ -9532,11 +9531,10 @@ var List = function (_React$Component) {
           )
         ),
         this.state.businesses.map(function (business) {
-          return _react2.default.createElement(_ListItem2.default, { phone: business.BusinessPhone, name: business.BusinessName });
+          return _react2.default.createElement(_ListItem2.default, { phone: business.businessPhone, name: business.businessName });
         }),
         _react2.default.createElement('button', { onClick: this.fetchBusinesses.bind(this) }),
-        ' Hello ',
-        _react2.default.createElement('button', null)
+        ' Refresh       '
       );
     }
   }]);

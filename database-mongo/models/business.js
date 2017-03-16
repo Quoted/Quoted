@@ -17,14 +17,58 @@ var businessSchema = mongoose.Schema({
 });
 
 
+
+
+
 businessSchema.pre('save', function(next) {
   next();
 });
 
 var Business = mongoose.model('Business', businessSchema);
 
-//Method checks if business exists
+// add test data
+Business.create({
+  businessName: "Edwin",
+  businessPhone: 7703357571,  
+  businessType: "test",
+  businessCity: 'San Francisco'
+}, function(err, data) {
+  console.log('saved');
+});
+Business.create({
+  businessName: "Han",
+  businessPhone: 5104568837,
+  businessType: "test",
+  businessCity: 'San Francisco'
+}, function(err, data) {
+  console.log('saved');
+});
+Business.create({
+  businessName: "Mike",
+  businessPhone: 4083182027,
+  businessType: "test",
+  businessCity: 'San Francisco'
+}, function(err, data) {
+  console.log('saved');
+});
+Business.create({
+  businessName: "Jason",
+  businessPhone: 6267168334,
+  businessType: "test",
+  businessCity: 'San Francisco'
+}, function(err, data) {
+  console.log('saved');
+});
 
-//Select all business
+
+
+
+
+
+
+
+
+
+
 
 module.exports = Business;

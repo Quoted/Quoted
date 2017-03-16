@@ -1,10 +1,16 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-var twilioKeys = require('../twilio_api');
 var items = require('../database-mongo');
+
 var Business = require('../database-mongo/index').Business;
+
 var twilio = require('twilio');
+
+var handler = require('./request-handler');
+//Twillio Requirements
+var twilioKeys = require('../twilio_api');
+
+
 
 var app = express();
 
@@ -16,11 +22,16 @@ var authToken = twilioKeys.authToken;
 var client = require('twilio')(accountSid, authToken);
 
 
+
 app.currentBusiness = {BusinessName: 'Ice Cream Truck'};
 
 // UNCOMMENT FOR REACT
-app.use(express.static(__dirname + '/../react-client/dist'));
 
+app.use(express.static(__dirname + '/../react-client/dist'));
+// parse application/x-www-form-urlencoded 
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json 
+app.use(bodyParser.json());
 
 app.post('/messages', function(req, res) {
   console.log('trying to send out text messages'); 
@@ -102,6 +113,7 @@ app.post('/call', function(req, res) {
   });
 });
 
+
 app.post('/voice', function(req, res) {
   var twiml = new twilio.TwimlResponse();
   // console.log('request', req.body);
@@ -128,6 +140,9 @@ app.post('/voice', function(req, res) {
 //     });
 //   }
 // });
+
+
+app.get('/businesses', handler.checkBusinessData); 
 
 
 app.listen(3000, function() {

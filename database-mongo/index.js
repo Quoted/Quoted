@@ -56,13 +56,13 @@ Business.create({
 }, function(err, data) {
   console.log('saved');
 });
-Business.create({
-  BusinessName: "Han",
-  BusinessCell: 5104568837,
-  Category: "test"
-}, function(err, data) {
-  console.log('saved');
-});
+// Business.create({
+//   BusinessName: "Han",
+//   BusinessCell: 5104568837,
+//   Category: "test"
+// }, function(err, data) {
+//   console.log('saved');
+// });
 Business.create({
   BusinessName: "Mike",
   BusinessCell: 4083182027,
@@ -70,13 +70,13 @@ Business.create({
 }, function(err, data) {
   console.log('saved');
 });
-Business.create({
-  BusinessName: "Jason",
-  BusinessCell: 6267168334,
-  Category: "test"
-}, function(err, data) {
-  console.log('saved');
-});
+// Business.create({
+//   BusinessName: "Jason",
+//   BusinessCell: 6267168334,
+//   Category: "test"
+// }, function(err, data) {
+//   console.log('saved');
+// });
 
 var selectAll = function(callback) {
   Business.find({}, function(err, items) {

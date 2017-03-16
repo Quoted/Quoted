@@ -6,7 +6,7 @@ var Promise = require('bluebird');
 //User Table Schema
 var userSchema = mongoose.Schema({
   name: String,
-  username: {type: String, index: {unique: true}},
+  username: { type: String, unique: true },
   password: String,
   userEmail: String,
   userCellPhone: String,

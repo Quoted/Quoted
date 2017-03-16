@@ -30,7 +30,6 @@ app.use(session({
 }));
 
 
-
 app.get('/user', function(req, res){
   console.log('req body: ', req.body);
   console.log('cookies: ', req.cookies);
@@ -58,6 +57,11 @@ app.post('/user', function(req, res){
   }
 });
 
+//MIKE THIS ISN'T DONE
+// app.get('/', handler.getUserSession);
+
+//BELOW IS OKAY
+app.get('/user/logout', handler.userLogout);
 app.post('/user/signup', handler.userSignUp);
 app.post('/user/login', handler.userLogin);
 app.post('/businesses', handler.checkBusinessData); 

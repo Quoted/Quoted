@@ -27,38 +27,13 @@ exports.checkBusinessData = function(req, res) {
           res.status(500).send("Something unexpected horrendeously happened"); 	
 			} else {
 				if( result.length <= 5) {
-					console.log('IM HERE - LESS THAN 5');
 					yelp.queryApi({ 'term': term, 'location': location })
 					.then(function(results) {
-						res.send(JSON.stringify(results));
+						res.json(results);
 					});
-					
-
-					// res.send(JSON.stringify(result));				
 				}
-
-					//callback attempt
-				// 	yelp.queryApi({ 'term': term, 'location': location }, function(err, result) {
-				// 		if (err) {
-				// 			console.log('IM HEREE');
-				// 			console.log(err);
-				// 		} else {
-				// 			var business = result.businesses;
-				// 			businesses.forEach((business) => {
-				// 		  	Business.create({
-				// 					businessName: business.name,
-				// 					businessPhone: business.phone,
-				// 		      businessCity: business.location.city,
-				// 		      businessType: business.categories
-				// 		  	});
-				// 			});
-				// 		}
-				// 	});
-				// } else {
-				// 	console.log('this is where the function that pulls existing database goes');
-				// }
-					// res.send('check your business database');
-		}
+				res.json(result);				
+			}
 		});
 };
 
@@ -85,8 +60,7 @@ exports.userLogin = function(req, res) {
 
   Users.findOne({ "username": username })
   	.exec(function(err, user) {
-  		console.log('user:', user);
-  		console.log('err:', err)
+  		console.log(user);
   		if (!user) {
         res.status(500).send("No such user");
       } else {
@@ -94,12 +68,24 @@ exports.userLogin = function(req, res) {
 		  		if (err) {
 		  			res.status(404).send("Incorrect Password");
 		  		} else {
+		  			console.log('req session prior to reg: ', req.session);
 		  			  req.session.regenerate(function() {
               req.session.user = user;
+		  				console.log('req session after reg: ', req.session);		  				
               res.json(user);
 		  				});
   				}
   			});
 			}
 		});
+};
+
+// exports.getUserSession = function(req, res) {
+// 	var checkSession = req.session ? 
+// };
+
+exports.userLogout = function(req, res) {
+	req.session.destroy(function() {
+		res.redirect('/user/login');
+	})
 };

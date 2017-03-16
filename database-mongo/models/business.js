@@ -1,10 +1,8 @@
 var db = require('../index.js');
 var mongoose = require('mongoose');
-// var bcrypt = require('bcrypt-nodejs');
-// var Promise = require('bluebird');
 
 var businessSchema = mongoose.Schema({
-  businessName: String,
+  businessName: {type: String, unique: true },
   businessAddress: String,
   businessCity: String,
   businessZip: String,

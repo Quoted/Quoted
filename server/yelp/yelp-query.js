@@ -15,14 +15,10 @@ var yelp = new Yelp({
   token_secret: yelpApi.tokenSecret
 });
 
-//callback attempt
 yelp.queryApi = function(obj) {
   return new Promise((resolve, reject) => {
-    // yelp.search(obj)
     yelp.search(obj)
     .then(function (data) {
-      // console.log(data);
-      console.log(data.businesses);
       var businesses = data.businesses;
 
       businesses.forEach((business) => {
@@ -42,30 +38,5 @@ yelp.queryApi = function(obj) {
     });
   })
 };
-
-
-
-
-// // See http://www.yelp.com/developers/documentation/v2/search_api
-// yelp.search({ term: 'auto', location: 'San Francisco' })
-// .then(function (data) {
-//   // console.log(data);
-//   console.log(data.businesses);
-//   var businesses = data.businesses;
-
-//   businesses.forEach((business) => {
-//   	Business.create({
-// 			businessName: business.name,
-// 			businessPhone: business.phone,
-//       businessCity: business.location.city,
-//       businessType: business.categories
-//   	}).then(function(result) {
-//       console.log('built', result);
-//     });
-//   });
-// })
-// .catch(function (err) {
-//   console.error(err);
-// });
 
 module.exports = yelp;

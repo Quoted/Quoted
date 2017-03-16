@@ -32297,13 +32297,12 @@ var Message = function (_React$Component) {
     return _this;
   }
 
+  // handleChange(e) {
+  //   this.setState({input: e.target.value});
+  //   console.log(e.target.value);
+  // }
+
   _createClass(Message, [{
-    key: 'handleChange',
-    value: function handleChange(e) {
-      this.setState({ input: e.target.value });
-      console.log(e.target.value);
-    }
-  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -32320,7 +32319,7 @@ var Message = function (_React$Component) {
           'div',
           null,
           _react2.default.createElement('textarea', { className: 'form-control col-md-8', rows: '8', id: 'textArea', onChange: function onChange(e) {
-              _this2.handleChange(e);
+              _this2.props.handleTextChange(e);
             } }),
           _react2.default.createElement(
             'span',
@@ -32431,6 +32430,10 @@ var _SoundIcon = __webpack_require__(183);
 
 var _SoundIcon2 = _interopRequireDefault(_SoundIcon);
 
+var _jquery = __webpack_require__(81);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32447,12 +32450,44 @@ var Inputs = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Inputs.__proto__ || Object.getPrototypeOf(Inputs)).call(this, props));
 
-    _this.state = {};
+    _this.state = {
+      textInput: ''
+    };
 
     return _this;
   }
 
   _createClass(Inputs, [{
+    key: 'handleTextChange',
+    value: function handleTextChange(e) {
+      this.setState({ textInput: e.target.value });
+      // console.log(e.target.value);
+      console.log(this.state.textInput);
+    }
+  }, {
+    key: 'sendInfo',
+    value: function sendInfo() {
+      console.log('Trying to send info', this.state.textInput);
+
+      //Send data to server to send text messages
+      _jquery2.default.ajax({
+        method: "POST",
+        url: '/messages',
+        data: { textInput: this.state.textInput },
+        success: function success(results) {
+          console.log('sucessfuly sent message', results);
+        }, error: function error(err) {
+          console.log('err recieved', err);
+        }
+      });
+
+      //Send data to server to send phone calls
+      // $.ajax({
+      // url: '/calls'
+      // })
+
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -32461,12 +32496,12 @@ var Inputs = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'col-sm-10' },
-          _react2.default.createElement(_Message2.default, null),
+          _react2.default.createElement(_Message2.default, { handleTextChange: this.handleTextChange.bind(this) }),
           _react2.default.createElement(_SoundIcon2.default, null),
           _react2.default.createElement(
             'button',
-            { className: 'btn btn-primary' },
-            ' Confirm info '
+            { onClick: this.sendInfo.bind(this), className: 'btn btn-primary' },
+            ' Send Info '
           )
         )
       );

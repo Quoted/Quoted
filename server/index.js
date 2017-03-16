@@ -63,23 +63,6 @@ app.post('/messages', function(req, res) {
     }
   });
   
-  // This is how to do a basic send message from twilio 
-  // where the 770 num is a verified number that is like a biz number 
-  // and the 415 number is a twilio number
-
-  // client.messages.create({
-  //     to: '7703357571',
-  //     from: '4152001619',
-  //     body: 'This is a test message, hello how are you',
-  // }, function (err, message) {
-  //     if (err) {
-  //       console.log('err', err);
-  //       res.status(404).end();
-  //     } else {
-  //       console.log('message sid', message.sid);
-  //       res.status(200).send();
-  //     }
-  // });
 });
 
 
@@ -90,33 +73,29 @@ app.post('/call', function(req, res) {
       console.log(err);
     } else {
       console.log('test businesses', businesses);
-      businesses.forEach(function(biz) { // UNCOMMENT
-        app.currentBusiness = biz;
-/// Set params in post request for url        
+      businesses.forEach(function(biz) {
+        console.log('calling people at this number', biz.BusinessPhone);
         client.calls.create({
           // url: 'http://demo.twilio.com/docs/voice.xml',
-          url: 'https://0eee99e4.ngrok.io/voice',
-          // url: 'https://0eee99e4.ngrok.io/Edwin',
-          to: biz.BusinessCell, // UNCOMMENT
-          // to: '7703357571',
+          url: '../TwilioResponses/Greeting.xml',
+          to: biz.BusinessPhone,
           from: '4152001619',
-        }, function (err, call) {
+          body: 'Test message, hello ' + biz.BusinessName +  ' Han wants to spam you',
+        }, function (err, message) {
           if (err) {
-            console.log(err);
-            // res.status(404).end();
+            console.log('err', err);            
+            res.status(404).end();
           } else {
             // console.log('message sid', message.sid);
-            // process.stdout.write(call.sid);
-            console.log(call.sid);
-            process.stdout.write(call.sid);
-            // res.status(200).send(call.sid);
+            console.log('message', message);
+            process.stdout.write(calls.sid);
+            res.status(200).send();
           }
         });
-        setTimeout(() => {}, 1000);
-        console.log('another business', app.currentBusiness.BusinessName);
-      }); //UNCOMMENT
+      });
     }
   });
+
 });
 
 

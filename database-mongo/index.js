@@ -11,6 +11,8 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
+/* 
+*/
 var businessSchema = mongoose.Schema({
   BusinessName: String,
   BusinessAddress: String,
@@ -18,11 +20,10 @@ var businessSchema = mongoose.Schema({
   BusinessZip: String,
   BusinessRating: Number,
   BusinessPhone: Number,
-  BusinessCell: Number,
+  // BusinessCell: Number, //Comment out, right now just use one pHone number
   BusinessEmail: String,
   BusinessPicture: String,
   Category: String,
-  BusinessType: String
 
 });
 
@@ -54,42 +55,33 @@ Business.remove({}, function(err, biz) {
 // add test data
 Business.create({
   BusinessName: "Edwin",
-  BusinessCell: 7703357571,
+  BusinessPhone: 7703357571,
   Category: "test"
 }, function(err, data) {
   console.log('saved');
 });
-// Business.create({
-//   BusinessName: "Han",
-//   BusinessCell: 5104568837,
-//   Category: "test"
-// }, function(err, data) {
-//   console.log('saved');
-// });
+Business.create({
+  BusinessName: "Han",
+  BusinessPhone: 5104568837,
+  Category: "test"
+}, function(err, data) {
+  console.log('saved');
+});
 Business.create({
   BusinessName: "Mike",
-  BusinessCell: 4083182027,
+  BusinessPhone: 4083182027,
   Category: "test"
 }, function(err, data) {
   console.log('saved');
 });
-// Business.create({
-//   BusinessName: "Jason",
-//   BusinessCell: 6267168334,
-//   Category: "test"
-// }, function(err, data) {
-//   console.log('saved');
-// });
+Business.create({
+  BusinessName: "Jason",
+  BusinessPhone: 6267168334,
+  Category: "test"
+}, function(err, data) {
+  console.log('saved');
+});
 
-var selectAll = function(callback) {
-  Business.find({}, function(err, items) {
-    if(err) {
-      callback(err, null);
-    } else {
-      callback(null, items);
-    }
-  });
-};
 
 module.exports.Business = Business;
 

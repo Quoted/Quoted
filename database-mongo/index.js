@@ -60,23 +60,24 @@ Business.create({
 }, function(err, data) {
   console.log('saved');
 });
-Business.create({
-  BusinessName: "Han",
-  BusinessPhone: 5104568837,
-  Category: "test"
-}, function(err, data) {
-  console.log('saved');
-});
+// Business.create({
+//   BusinessName: "Han",
+//   BusinessPhone: 5104568837,
+//   Category: "test"
+// }, function(err, data) {
+//   console.log('saved');
+// });
+
+// Business.create({
+//   BusinessName: "Jason",
+//   BusinessPhone: 6267168334,
+//   Category: "test"
+// }, function(err, data) {
+//   console.log('saved');
+// });
 Business.create({
   BusinessName: "Mike",
   BusinessPhone: 4083182027,
-  Category: "test"
-}, function(err, data) {
-  console.log('saved');
-});
-Business.create({
-  BusinessName: "Jason",
-  BusinessPhone: 6267168334,
   Category: "test"
 }, function(err, data) {
   console.log('saved');

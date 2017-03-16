@@ -22,7 +22,45 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json 
 app.use(bodyParser.json());
+app.use(cookieParser('Greenfie1dBr0s'));
+app.use(session({
+  secret: 'Greenfie1dBr0s',
+  resave: false,
+  saveUninitialized: true
+}));
 
+
+
+app.get('/user', function(req, res){
+  console.log('req body: ', req.body);
+  console.log('cookies: ', req.cookies);
+  console.log('session: ', req.session);  
+  var sessionCheck = req.session ? !!req.session.username : false;
+  if (sessionCheck) {
+    res.json(req.session.user);
+  } else {
+    res.json(null);
+  }
+});
+
+
+app.post('/user', function(req, res){
+  console.log('req ', req);
+  var sessionCheck = req.session ? !!req.session.username : false;
+  if (sessionCheck) {
+    console.log('i\'m getting destroyed');
+    req.session.destroy(function(){
+      res.end();
+    }); 
+  } else {
+    console.log('failed');
+    res.end();
+  }
+});
+
+app.post('/user/signup', handler.userSignUp);
+app.post('/user/login', handler.userLogin);
+app.post('/businesses', handler.checkBusinessData); 
 
 // app.post('/messages', function(req, res) {
 //   console.log('trying to send out text messages');  
@@ -41,7 +79,6 @@ app.use(bodyParser.json());
 //   });
 // });
 
-app.get('/businesses', handler.checkBusinessData); 
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');

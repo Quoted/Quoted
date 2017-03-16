@@ -1,19 +1,21 @@
 var db = require('../index.js');
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
-var Promise = require('bluebird');
+// var bcrypt = require('bcrypt-nodejs');
+// var Promise = require('bluebird');
 
 var businessSchema = mongoose.Schema({
-  BusinessName: String,
-  BusinessAddress: String,
-  BusinessCity: String,
-  BusinessZip: String,
-  BusinessRating: Number,
-  BusinessPhone: Number,
-  BusinessCell: Number,
-  BusinessEmail: String,
-  BusinessPicture: String,
-  BusinessType: String
+  businessName: String,
+  businessAddress: String,
+  businessCity: String,
+  businessZip: String,
+  businessRating: Number,
+  businessPhone: Number,
+  businessCell: Number,
+  businessEmail: String,
+  businessPicture: String,
+  businessType: Array,
+  businessLat: Number,
+  businessLong: Number
 });
 
 

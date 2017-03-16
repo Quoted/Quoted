@@ -5,15 +5,15 @@ var Promise = require('bluebird');
 
 //User Table Schema
 var userSchema = mongoose.Schema({
-  Name: String,
-  Username: {type: String, index: {unique: true}},
-  Password: String,
-  UserEmail: String,
-  UserCellPhone: String,
-  Salt: String,
-  UserAddress: String,
-  UserCity: String,
-  UserZip: Number
+  name: String,
+  username: {type: String, index: {unique: true}},
+  password: String,
+  userEmail: String,
+  userCellPhone: String,
+  salt: String,
+  userAddress: String,
+  userCity: String,
+  userZip: Number
 });
 
 //Middleware to hash password
@@ -29,7 +29,6 @@ userSchema.pre('save', function(next) {
 
 //Users Collection
 var Users = mongoose.model('Users', userSchema);
-
 
 //Method to comparePassword in database against submitted password
 Users.comparePassword = function(attemptedPassword, savedPassword, callback) {

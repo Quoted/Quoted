@@ -18,6 +18,11 @@ var client = require('twilio')(accountSid, authToken);
 
 var app = express();
 
+
+//Deployement ports
+app.set('port', (process.env.PORT || 3000));
+
+
 app.use(express.static(__dirname + '/../react-client/dist'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -149,7 +154,7 @@ app.post('/call', function(req, res) {
 
 
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
+app.listen(app.get('port'), function() {
+  console.log('listening on on port:' + app.get('port'));
 });
 

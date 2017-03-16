@@ -5,10 +5,8 @@ var n = require('nonce')();
 var request = require('request');
 var qs = require('querystring');
 var Yelp = require('yelp');
-//var _ = require('lodash')
-// var db = require('../../database-mongo/index.js');
-var Business = require('../../database-mongo/index').Business;
-
+var Business = require('../../database-mongo/models/business.js')
+var Promise = require('bluebird');
 
 var yelp = new Yelp({
   consumer_key: yelpApi.consumerKey,
@@ -17,25 +15,28 @@ var yelp = new Yelp({
   token_secret: yelpApi.tokenSecret
 });
 
-// See http://www.yelp.com/developers/documentation/v2/search_api
-yelp.search({ term: 'auto', location: 'San Francisco' })
-.then(function (data) {
-  // console.log(data);
-  console.log(data.businesses);
-  var businesses = data.businesses;
+yelp.queryApi = function(obj) {
+  return new Promise((resolve, reject) => {
+    yelp.search(obj)
+    .then(function (data) {
+      var businesses = data.businesses;
 
-  businesses.forEach((business) => {
-  	Business.create({
-			BusinessName: business.name,
-			BusinessPhone: business.phone		
-  	}).then(function(result) {
-      console.log('built', result);
+      businesses.forEach((business) => {
+        Business.create({
+          businessName: business.name,
+          businessPhone: business.phone,
+          businessCity: business.location.city,
+          businessType: business.categories
+       }).then(function(result) {
+          console.log('built', result);          
+        });       
+      });
+      resolve(data);
+    })
+    .catch(function (err) {
+      console.error(err);
     });
-  });
-})
-.catch(function (err) {
-  console.error(err);
-  
-});
+  })
+};
 
 module.exports = yelp;

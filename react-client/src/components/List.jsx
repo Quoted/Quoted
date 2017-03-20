@@ -43,7 +43,7 @@ class List extends React.Component {
         {
           
           this.state.businesses.map((business) => {
-            return <ListItem phone={business.businessPhone} name={business.businessName} />
+            return <ListItem phone={business.businessPhone} name={business.businessName} key={business.businessName}/>
           })
         }
         <button onClick={this.fetchBusinesses.bind(this)} /> Refresh       </div>

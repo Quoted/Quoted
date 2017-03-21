@@ -1,24 +1,16 @@
 // handle user media capture
-export function captureUserMedia(callback) {
-
+export function captureUserMedia() {
   var params = { audio: true, video: false };
+  //returns a mediastream object
   return navigator.mediaDevices.getUserMedia(params);
-
-  // var params = { audio: true, video: false };
-
-  // navigator.getUserMedia(params, callback, (error) => {
-  //   alert(JSON.stringify(error));
-  // });
 };
 
 
 // handle S3 upload
 function getSignedUrl(file) {
   let queryString = '?objectName=' + file.id + '&contentType=' + encodeURIComponent(file.type);
-  console.log('querystring: ' + queryString);
   return fetch('/s3/sign' + queryString)
   .then((response) => {
-    console.log('fetched response: ' + response);
     return response.json();
   })
   .catch((err) => {

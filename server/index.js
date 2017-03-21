@@ -20,7 +20,7 @@ var client = require('twilio')(accountSid, authToken);
 var app = express();
 
 
-//Deployement ports
+//Deployment ports
 app.set('port', (process.env.PORT || 3000));
 
 
@@ -36,39 +36,39 @@ app.use(session({
   saveUninitialized: true
 }));
 
+//router for S3
 app.use('/s3', s3Router({
   bucket: 'hrsf72-quoted-app',
   ACL: 'public-read'
 }))
 
 
-app.get('/user', function(req, res){ 
-  var sessionCheck = req.session ? !!req.session.username : false;
-  if (sessionCheck) {
-    res.json(req.session.user);
-  } else {
-    res.json(null);
-  }
-});
+// app.get('/user', function(req, res){ 
+//   var sessionCheck = req.session ? !!req.session.username : false;
+//   if (sessionCheck) {
+//     res.json(req.session.user);
+//   } else {
+//     res.json(null);
+//   }
+// });
 
-app.post('/user', function(req, res){
-  console.log('req ', req);
-  var sessionCheck = req.session ? !!req.session.username : false;
-  if (sessionCheck) {
-    console.log('i\'m getting destroyed');
-    req.session.destroy(function(){
-      res.end();
-    }); 
-  } else {
-    console.log('failed');
-    res.end();
-  }
-});
+// app.post('/user', function(req, res){
+//   console.log('req ', req);
+//   var sessionCheck = req.session ? !!req.session.username : false;
+//   if (sessionCheck) {
+//     console.log('i\'m getting destroyed');
+//     req.session.destroy(function(){
+//       res.end();
+//     }); 
+//   } else {
+//     console.log('failed');
+//     res.end();
+//   }
+// });
 
-app.get('/user/logout', handler.userLogout);
 app.post('/user/signup', handler.userSignUp);
 app.post('/user/login', handler.userLogin);
-
+app.get('/user/logout', handler.userLogout);
 app.post('/businesses', handler.checkBusinessData); 
 app.get('/businesses', handler.checkBusinessData); 
 

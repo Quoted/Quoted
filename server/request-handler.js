@@ -19,16 +19,14 @@ exports.checkBusinessData = function(req, res) {
 	var geolocationLat = req.body.geolocationLat;
 	var geolocationLong = req.body.geolocationLong;	
 
-
-
-  //To put filters in late
+  //To put filters in later
 	// Business.find({"businessType": category, "businessCity": location})
   // Business.find({"businessCity": 'San Francisco'}) 
   Business.find({})
 		.exec(function(err, result) {
-      console.log(result);
+      console.log('result from find: ', result);
 			if (err) {
-          res.status(500).send("Something unexpected horrendeously happened"); 	
+          res.status(500).send("Something unexpected and horrendeous happened"); 	
 			} else {
 				if( result.length <= 2) {
 					yelp.queryApi({ 'term': term, 'location': location })
@@ -37,6 +35,7 @@ exports.checkBusinessData = function(req, res) {
 					});
 				}							
 			}
+      console.log('request session: ', req.session);
       res.json(result); 
 		});
 };
@@ -64,7 +63,7 @@ exports.userLogin = function(req, res) {
 
   Users.findOne({ "username": username })
   	.exec(function(err, user) {
-  		console.log(user);
+  		console.log('user logging in: ', user);
   		if (!user) {
         res.status(500).send("No such user");
       } else {

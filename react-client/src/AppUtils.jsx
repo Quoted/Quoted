@@ -1,17 +1,24 @@
 // handle user media capture
 export function captureUserMedia(callback) {
-  var params = { audio: false, video: true };
 
-  navigator.getUserMedia(params, callback, (error) => {
-    alert(JSON.stringify(error));
-  });
+  var params = { audio: true, video: false };
+  return navigator.mediaDevices.getUserMedia(params);
+
+  // var params = { audio: true, video: false };
+
+  // navigator.getUserMedia(params, callback, (error) => {
+  //   alert(JSON.stringify(error));
+  // });
 };
+
 
 // handle S3 upload
 function getSignedUrl(file) {
   let queryString = '?objectName=' + file.id + '&contentType=' + encodeURIComponent(file.type);
+  console.log('querystring: ' + queryString);
   return fetch('/s3/sign' + queryString)
   .then((response) => {
+    console.log('fetched response: ' + response);
     return response.json();
   })
   .catch((err) => {
@@ -38,6 +45,7 @@ export function S3Upload(fileInfo) { //parameters: { type, data, id }
   return new Promise((resolve, reject) => {
     getSignedUrl(fileInfo)
     .then((s3Info) => {
+      console.log('s3 Info: ' + s3Info);
       // upload to S3
       var xhr = createCORSRequest('PUT', s3Info.signedUrl);
 
@@ -47,7 +55,6 @@ export function S3Upload(fileInfo) { //parameters: { type, data, id }
           resolve(true);
         } else {
           console.log(xhr.status)
-          
           reject(xhr.status);
         }
       };

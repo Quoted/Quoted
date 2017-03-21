@@ -15,7 +15,7 @@ class SoundIcon extends React.Component {
     this.state = {
       listening: false,
       recordVideo: null,
-      srsc: null,
+      src: null,
       uploadSuccess: null,
       uploading: false
     };
@@ -35,32 +35,42 @@ class SoundIcon extends React.Component {
 
   requestUserMedia() {
     console.log('requestUserMedia')
-    captureUserMedia((stream) => {
-      this.setState({ src: window.URL.createObjectURL(stream) });
-      console.log('setting state', this.state)
-    });
+     captureUserMedia().then((stream) => {
+      this.setState({src: window.URL.createObjectURL(stream) });
+     }).catch((err) => console.log(err));
+
+    // captureUserMedia((stream) => {
+    //   this.setState({ src: window.URL.createObjectURL(stream) });
+    //   console.log('setting state', this.state)
+    // });
   }  
 
   startRecord() {
-    captureUserMedia((stream) => {
-      this.state.recordVideo = RecordRTC(stream, { type: 'video' });
+    captureUserMedia().then((stream) => {
+      this.state.recordVideo = RecordRTC(stream, { type: 'audio'});
       this.state.recordVideo.startRecording();
-    });
+    })
 
-    setTimeout(() => {
-      this.stopRecord();
-    }, 4000);
+
+    // captureUserMedia((stream) => {
+    //   this.state.recordVideo = RecordRTC(stream, { type: 'audio' });
+    //   this.state.recordVideo.startRecording();
+    // });
+
+    // setTimeout(() => {
+    //   this.stopRecord();
+    // }, 4000);
   }
 
   stopRecord() {
     this.state.recordVideo.stopRecording(() => {
       let params = {
-        type: 'video/webm',
+        type: 'audio',
         data: this.state.recordVideo.blob,
         id: Math.floor(Math.random()*90000) + 10000
       }
 
-      this.setState({ uploading: true });
+      // this.setState({ uploading: true });
 
       S3Upload(params)
       .then((success) => {
@@ -75,6 +85,15 @@ class SoundIcon extends React.Component {
     });
   }
 
+  playRecord() {
+    var self = this;
+    var superBuffer = new Blob(self.state.recordVideo.blob, { type: 'audio',
+        bufferSize:  16384 
+      });
+    this.setState({url: window.URL.createObjectURL(superBuffer)});
+  }
+
+
   handlePress() {
     this.setState({listening: !this.state.listening})
   }
@@ -87,11 +106,11 @@ class SoundIcon extends React.Component {
     return (
       <div>
         <div><Webcam src={this.state.src}/></div>
+        <img style={style} onClick={this.startRecord} src="assets/soundIcon.png" />  
+        <div><button onClick={this.stopRecord}>Stop Record</button></div>
+        <div><button onClick={this.playRecord}>Play Record</button></div>
         {this.state.uploading ?
           <div>Uploading...</div> : null}
-        <div><button onClick={this.startRecord}>Start Record</button></div>
-
-        <img style={style} onClick={this.handlePress.bind(this)} src="assets/soundIcon.png" />  
       </div>
     )
   }

@@ -7,6 +7,7 @@ var handler = require('./request-handler');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var path = require('path');
+var s3Router = require('./s3Router');
 
 //Twillio Requirements
 var twilioKeys = require('../twilio_api');
@@ -34,6 +35,11 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+
+app.use('/s3', s3Router({
+  bucket: 'hrsf72-quoted-app',
+  ACL: 'public-read'
+}))
 
 
 app.get('/user', function(req, res){ 

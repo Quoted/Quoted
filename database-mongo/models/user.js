@@ -26,7 +26,6 @@ userSchema.pre('save', function(next) {
     });
 });
 
-
 //Users Collection
 var Users = mongoose.model('Users', userSchema);
 

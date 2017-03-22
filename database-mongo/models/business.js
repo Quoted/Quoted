@@ -16,10 +16,6 @@ var businessSchema = mongoose.Schema({
   businessLong: Number
 });
 
-
-
-
-
 businessSchema.pre('save', function(next) {
   next();
 });
@@ -59,16 +55,6 @@ Business.create({
 }, function(err, data) {
   console.log('saved');
 });
-
-
-
-
-
-
-
-
-
-
 
 
 module.exports = Business;

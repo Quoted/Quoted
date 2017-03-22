@@ -20,50 +20,6 @@ exports.createSalt = function() {
   return crypto.randomBytes(20).toString('hex');
 };
 
-/*
-exports.loadBusinessData = function(req, res, next) {
-  var term = req.body.term;
-  var category = req.body.category;
-  var location = req.body.location;
-  var geolocationLat = req.body.geolocationLat;
-  var geolocationLong = req.body.geolocationLong;
-
-  Business.find({"businessType": category, "businessCity": location})
-    .exec(function(err,result) {
-      if (err) {
-        res.status(500).send("Something unexpected and horrendeous happened");  
-      } else {
-        if (result.length <= 2) {
-          next();
-          return;
-        }
-        console.log('result from loadBusinessData: ', result);
-        res.json(result);
-      }
-    });
-};
-
-exports.queryYelp = function(req, res, next) {
-  var term = req.body.term;
-  var category = req.body.category;
-  var location = req.body.location;
-  var geolocationLat = req.body.geolocationLat;
-  var geolocationLong = req.body.geolocationLong; 
-
-
-  console.log('The category is: !!', category);
-
-  yelp.queryApi({ 'term': category, 'location': location })
-    .then((results) => {
-      console.log('yelp query results: ', results);
-      next();
-      return;
-    });
-
-  next();
-}
-*/
-
 
 exports.checkBusinessData = function(req, res) {
 	var term = req.body.term;

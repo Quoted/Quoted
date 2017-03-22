@@ -66,4 +66,11 @@ input[type='checkbox']:checked {
   background-color: #ffa500; 
 }
 
+/*
+This makes the text inside the Nav Select black instead of white 
+*/
+select {
+  color: black;
+}
+
 

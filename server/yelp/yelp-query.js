@@ -17,26 +17,30 @@ var yelp = new Yelp({
 
 yelp.queryApi = function(obj) {
   return new Promise((resolve, reject) => {
+    // var yelpPromise = Promise.promisify(yelp.search);
     yelp.search(obj)
+    // yelpPromise(obj)
     .then(function (data) {
       var businesses = data.businesses;
       businesses.forEach((business) => {
         Business.create({
           businessName: business.name,
           businessPhone: business.phone,
+          businessAddress: business.location.address,
           businessCity: business.location.city,
+          // businessPicture: business.snippet_image_url,
           businessType: business.categories
        }).then(function(result) {
-          console.log('built', result);          
+          console.log('stored following entry into Business Schema: ', result);     
         });       
       });
       resolve(data);
     })
     .catch(function (err) {
+      console.log('im erroring out');
       console.error(err);
-
     });
-  })
+  });
 };
 
 module.exports = yelp;

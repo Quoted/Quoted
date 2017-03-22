@@ -10,15 +10,11 @@ var businessSchema = mongoose.Schema({
   businessPhone: Number,
   businessCell: Number,
   businessEmail: String,
-  businessPicture: String,
-  businessType: Array,
+  businessPicture: {data: Buffer, contentType: String},
+  businessType: [String], //Changed from Array
   businessLat: Number,
   businessLong: Number
 });
-
-
-
-
 
 businessSchema.pre('save', function(next) {
   next();
@@ -59,15 +55,6 @@ Business.create({
 }, function(err, data) {
   console.log('saved');
 });
-
-
-
-
-
-
-
-
-
 
 
 

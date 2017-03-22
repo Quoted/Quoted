@@ -1,5 +1,10 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/selfieAppTest');
+
+var mongoUrl = process.env.MONGOLAB_URI ||
+process.env.MONGODB_URI ||
+'mogodb://localhost/test';
+
+mongoose.connect(mongoUrl);
 
 var db = mongoose.connection;
 

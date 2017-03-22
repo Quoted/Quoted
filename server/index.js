@@ -21,11 +21,6 @@ var s3Router = require('./s3Router');
 
 var app = express();
 
-//Deployement ports
-app.set('port', (process.env.PORT || 3000));
-
-
-
 app.use(express.static(__dirname + '/../react-client/dist'));
 
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -145,15 +145,15 @@ exports.userLogout = function(req, res) {
 	})
 };
 
-
-
 exports.textBusinesses = function(req, res) {
   console.log('getting response from client'); 
   console.log('req body', req.body);
   var textInput = req.body.textInput
   console.log('textInput', textInput);
+  // if we are just getting an array from the client then we don't need to do the Business.find
+  // we'd just start on the forEach loop
   var businessType = "test" // req.body. businesstype
-
+  var location = "San Francisco" // req.body.    locationCity? 
 
   Business.find({businessType: businessType}, function(err, businesses){
     if (err) {
@@ -178,7 +178,7 @@ exports.textBusinesses = function(req, res) {
         });
       });
     }
-  });
+  }); // possibly limit here if we're still quering from db!
 };
 
 
@@ -191,9 +191,9 @@ exports.callBusinesses = function(req, res) {
       console.log('test businesses', businesses);
       businesses.forEach(function(biz) {
         client.calls.create({
-          // url: 'https://0eee99e4.ngrok.io/voice',
-          url: 'https://5eae2b54.ngrok.io/voice',
-          // url: 'http://demo.twilio.com/docs/voice.xml',
+          // FOR THE URL in the server in terminal write "./ngrok http 3000". Then paste the URL below followed by /voice
+          url: 'https://5eae2b54.ngrok.io/voice', // CHANGE THIS!!!!
+          // url: 'http://demo.twilio.com/docs/voice.xml', // The twilio test
           to: biz.businessPhone,
           from: '4152001619',
         }, function (err, call) {
@@ -210,11 +210,7 @@ exports.callBusinesses = function(req, res) {
 };
 
 exports.setVoiceMessage = function(req, res) {
-  // var textInput = req.body.textInput;
-  // textInput = 'Get me a mechanic';
-
   var twiml = new twilio.TwimlResponse();
-  // twiml.say('Hey ');
   // twiml.play('http://demo.twilio.com/docs/classic.mp3');
   // twiml.play('https://s3-us-west-1.amazonaws.com/hrsf72-quoted-app/75386.mp3');
   // twiml.play('https://s3-us-west-1.amazonaws.com/hrsf72-quoted-app/90665.audio');

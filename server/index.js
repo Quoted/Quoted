@@ -66,7 +66,8 @@ app.use('/s3', s3Router({
 app.post('/user/signup', handler.userSignUp);
 app.post('/user/login', handler.userLogin);
 app.get('/user/logout', handler.userLogout);
-app.post('/businesses', handler.checkBusinessData); 
+// app.post('/businesses', handler.loadBusinessData, handler.queryYelp, handler.loadBusinessData);
+app.post('/businesses', handler.checkBusinessData);
 app.get('/businesses', handler.checkBusinessData); 
 
 app.post('/messages', function(req, res) {

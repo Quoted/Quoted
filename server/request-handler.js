@@ -20,6 +20,7 @@ exports.createSalt = function() {
   return crypto.randomBytes(20).toString('hex');
 };
 
+/*
 exports.loadBusinessData = function(req, res, next) {
   var term = req.body.term;
   var category = req.body.category;
@@ -49,7 +50,10 @@ exports.queryYelp = function(req, res, next) {
   var geolocationLat = req.body.geolocationLat;
   var geolocationLong = req.body.geolocationLong; 
 
-  yelp.queryApi({ 'term': term, 'location': location })
+
+  console.log('The category is: !!', category);
+
+  yelp.queryApi({ 'term': category, 'location': location })
     .then((results) => {
       console.log('yelp query results: ', results);
       next();
@@ -58,6 +62,7 @@ exports.queryYelp = function(req, res, next) {
 
   next();
 }
+*/
 
 
 exports.checkBusinessData = function(req, res) {
@@ -67,31 +72,23 @@ exports.checkBusinessData = function(req, res) {
 	var geolocationLat = req.body.geolocationLat;
 	var geolocationLong = req.body.geolocationLong;	
 
+  console.log('category in request handelr', category);
+  console.log('location in request handelr', location);
 
-  console.log('this is the req.body: ', req.body);
-	//check if there are any businesses that matches the provided params
   Business.find({"businessType": category, "businessCity": location})
-  // Business.find({"businessCity": location}) 
-  // Business.find({})
-
 		.exec(function(err, result) {
-      console.log('result from mongoose find: ', result);
 			if (err) {
-          //it is never going to be inside here - no result still outputs an empty array.
           res.status(500).send("Something unexpected and horrendeous happened"); 	
 			} else {
-        //if the length of the db search result is less than the indicated threshold
         if(result.length <= 2) {
-          //query yelp api while saving the information into db
           yelp.queryApi({ 'term': term, 'location': location })
-        //there is an async issue with this part - ideally we will send the newly created businesses from our db as our response
 					.then((results) => {
             console.log('yelp query results: ', results);
 						res.json(results);
 					});
-        }             
-      // console.log('request session: ', req.session);
-      res.json(result); 
+        } else {            
+          res.json(result); 
+        }
       }
 		});
 };

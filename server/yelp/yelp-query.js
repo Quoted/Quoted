@@ -17,21 +17,20 @@ var yelp = new Yelp({
 
 yelp.queryApi = function(obj) {
   return new Promise((resolve, reject) => {
-    // var yelpPromise = Promise.promisify(yelp.search);
     yelp.search(obj)
-    // yelpPromise(obj)
     .then(function (data) {
       var businesses = data.businesses;
       businesses.forEach((business) => {
+        console.log('obj term', obj.term);
         Business.create({
           businessName: business.name,
           businessPhone: business.phone,
           businessAddress: business.location.address,
           businessCity: business.location.city,
           // businessPicture: business.snippet_image_url,
-          businessType: business.categories
+          businessType: obj.term
        }).then(function(result) {
-          console.log('stored following entry into Business Schema: ', result);     
+          // console.log('stored following entry into Business Schema: ', result);     
         });       
       });
       resolve(data);
@@ -42,5 +41,13 @@ yelp.queryApi = function(obj) {
     });
   });
 };
+
+
+
+
+// //Populating the database with auto stuff and home repair stuff
+// yelp.queryApi({category: 'Home Repair', term: 'Home Repair', location: 'San Francisco'});
+// yelp.queryApi({category: 'Auto Repair', term: 'Auto Repair', location: 'San Francisco'});
+
 
 module.exports = yelp;

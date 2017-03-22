@@ -19,9 +19,9 @@ exports.checkBusinessData = function(req, res) {
 	var geolocationLat = req.body.geolocationLat;
 	var geolocationLong = req.body.geolocationLong;	
 
-  //To put filters in later - theres something strange about the criteria by businessType - issue may be because the businessType is an array and were looking for a particular string inside the array. The reason why its an array is because yelp has multiple categories for each business.
-	// Business.find({"businessType": category, "businessCity": location})
-  Business.find({"businessCity": 'San Francisco'}) 
+  console.log('this is the req.body: ', req.body);
+	Business.find({"businessType": category, "businessCity": location})
+  // Business.find({"businessCity": location}) 
   // Business.find({})
 		.exec(function(err, result) {
       console.log('result from find: ', result);
@@ -31,12 +31,12 @@ exports.checkBusinessData = function(req, res) {
 				if(result.length <= 2) {
 					yelp.queryApi({ 'term': term, 'location': location })
 					.then(function(results) {
-						res.json(results);
+						return res.json(results);
 					});
 				}							
-			}
       console.log('request session: ', req.session);
       res.json(result); 
+      }
 		});
 };
 

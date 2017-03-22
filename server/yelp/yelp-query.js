@@ -36,7 +36,6 @@ yelp.queryApi = function(obj) {
     })
     .catch(function (err) {
       console.error(err);
-
     });
   })
 };

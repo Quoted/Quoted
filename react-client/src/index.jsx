@@ -37,15 +37,14 @@ class App extends React.Component {
     this.setState({location: event.target.value});
   }
 
-  fetchBusinesses() {
+  fetchBusinesses(event) {
     let params = {};
     params.term = this.state.queryString || 'test';
     params.category = this.state.businessCategory || 'test';
     params.location = this.state.location || 'San Francisco';
-    params = JSON.stringify(params);
     console.log('fetchBusiness params: ', params);
 
-    $.get({
+    $.post({
       url: '/businesses',
       data: params,
       dataType: 'json',

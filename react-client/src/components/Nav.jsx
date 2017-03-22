@@ -9,8 +9,9 @@ class Nav extends React.Component {
 
   render() {
     return (  
-	    <form onSubmit={this.props.fetchBusinesses}>
 	    	<nav className="navbar navbar-default"> 
+	    	<div className="container-fluid">
+	    <form onSubmit={this.props.fetchBusinesses}>
 	    		<ul className="nav navbar-nav">
 	    				<li><a href="#">Fredx</a></li>
 	    				<li>
@@ -27,7 +28,7 @@ class Nav extends React.Component {
 					            <option value="Auto Repair">Auto Repair</option>
 					            <option value="Home Repair">Home Repair</option>
 					            <option value="HRSF72">HRSF72</option>
-					            <option value="Test">Test</option>
+					            <option value="test">Test</option>
 					          </select>
 		    					</label>
 		    				</a>
@@ -44,8 +45,9 @@ class Nav extends React.Component {
 	    				</li>
 	    				<input type="submit" value="Search Businesses" className="btn btn-default"/>    				
 	  			</ul>
-	  		</nav>
 	    </form>
+	  			</div>
+	  		</nav>
     )
 
   }

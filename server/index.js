@@ -23,7 +23,6 @@ var app = express();
 //Deployment ports
 app.set('port', (process.env.PORT || 3000));
 
-
 app.use(express.static(__dirname + '/../react-client/dist'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -77,9 +76,6 @@ app.post('/messages', function(req, res) {
   console.log('req body', req.body);
   var textInput = req.body.textInput
   console.log('textInput', textInput);
-
-
-
 
   Business.find({businessType: "test"}, function(err, businesses){
     if (err) {

@@ -24,7 +24,9 @@ yelp.queryApi = function(obj) {
         Business.create({
           businessName: business.name,
           businessPhone: business.phone,
+          businessAddress: business.location.address,
           businessCity: business.location.city,
+          businessPicture: business.snippet_image_url,
           businessType: business.categories
        }).then(function(result) {
           console.log('built', result);          

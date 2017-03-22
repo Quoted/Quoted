@@ -52,7 +52,7 @@ class SoundIcon extends React.Component {
       if (this.state.recordVideo !== null) {
         this.state.recordVideo.clearRecordedData();
       }
-      this.state.recordVideo = RecordRTC(stream, {type: 'audio'});
+      this.state.recordVideo = RecordRTC(stream, {type: 'audio', mimeType: 'audio/mp3'});
       this.state.recordVideo.startRecording();
     });
   }
@@ -60,7 +60,7 @@ class SoundIcon extends React.Component {
   stopRecord() {
     this.state.recordVideo.stopRecording(() => {
       let params = {
-        type: 'audio',
+        type: 'audio/mp3',
         data: this.state.recordVideo.blob,
         id: Math.floor(Math.random()*90000) + 10000
       }
@@ -88,7 +88,7 @@ class SoundIcon extends React.Component {
   playRecord() {
     var self = this;
     console.log(self.state.recordVideo.blob);
-    var superBuffer = new Blob(self.state.recordVideo.blob, { type: 'audio',
+    var superBuffer = new Blob(self.state.recordVideo.blob, { type: 'audio/mp3',
         bufferSize:  16384 
       });
     this.setState({url: window.URL.createObjectURL(superBuffer)});

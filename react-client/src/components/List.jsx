@@ -5,32 +5,6 @@ import $ from 'jquery'
 class List extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      businesses: []
-    };
-
-  }
-
-  handleChange(e) {
-    this.setState({input: e.target.value});
-    console.log(e.target.value);
-  }
-
-  fetchBusinesses() {
-    console.log('clicked')
-    $.get({
-      url: '/businesses',      
-      success: (results) => {
-        this.setState({businesses: results});
-      }, error: (err) => {
-        console.log('err', err);
-      }
-    })
-  }
-
-  componentDidMount() {
-    this.fetchBusinesses();
   }
 
   render() {
@@ -41,13 +15,12 @@ class List extends React.Component {
           <label className="toggleAll" for="checkAll">ToggleAll</label>
         </div> 
         {
-          
-          this.state.businesses.map((business) => {
-            return <ListItem phone={business.businessPhone} name={business.businessName} />
+          this.props.businesses.map((business) => {
+            return <ListItem business={business} key={business._id}/>
           })
         }
-        <button onClick={this.fetchBusinesses.bind(this)} /> Refresh       </div>
-
+        <button onClick={this.props.fetchBusinesses}> Refresh </button>  
+      </div>
     )
 
   }

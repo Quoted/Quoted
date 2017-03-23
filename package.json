@@ -6,7 +6,7 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "server-dev": "node server/index.js",
-    "start": "node server/index.js"
+    "start": "nodemon server/index.js"
   },
   "author": "Beth Johnson",
   "license": "ISC",
@@ -35,6 +35,7 @@
     "oauth-signature": "^1.3.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-router": "^4.0.0",
     "recordrtc": "^5.4.1",
     "request": "^2.81.0",
     "twilio": "^2.11.1",

@@ -52,18 +52,14 @@ input[type='checkbox']:checked {
     background: #abd;
 }
 
-.toggleAll {
-  margin-top: 10px;
-  margin-right: 5px;
-  float:right;
-
-}
-
-
 .listItem {
   width: 100%;
-  height: 70px;
-  background-color: #ffa500; 
+  height: 140px;
+  /*background-color: #ffa500; */
+  /*background-color: light-blue;*/
+  /*background-color: #4099FF;*/
+  margin: 5px;
+  border: 5px solid #e95420;
 }
 
 /*
@@ -71,6 +67,20 @@ This makes the text inside the Nav Select black instead of white
 */
 select {
   color: black;
+}
+
+.left {
+  float: left;
+}
+
+.businessImage {
+  height: 80%;
+  width: 60%;
+}
+
+
+.search {
+  margin-top: 10px;
 }
 
 

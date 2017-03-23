@@ -37,10 +37,10 @@ exports.checkBusinessData = function(req, res) {
           res.status(500).send("Something unexpected and horrendeous happened"); 	
 			} else {
         if(result.length <= 2) {
-          yelp.queryApi({ 'term': term, 'location': location })
+          yelp.queryApi({ 'term': category, 'location': location })
 					.then((results) => {
             console.log('yelp query results: ', results);
-						res.json(results);
+						res.json(results.businesses);
 					});
         } else {            
           res.json(result); 

@@ -17299,24 +17299,46 @@ var ListItem = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'listItem container-fluid' },
+        { className: 'listItem container' },
         _react2.default.createElement(
           'div',
-          null,
-          ' Name: ',
-          this.props.business.businessName
-        ),
-        _react2.default.createElement(
-          'div',
-          null,
-          ' Address: ',
-          this.props.business.businessAddress
-        ),
-        _react2.default.createElement(
-          'div',
-          null,
-          ' Phone: ',
-          this.props.business.businessPhone
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-md-3 col-lg-3' },
+            ' ',
+            _react2.default.createElement('img', { className: 'businessImage', src: this.props.business.businessPictureUrl }),
+            ' '
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-md-9 col-lg-9' },
+            _react2.default.createElement(
+              'div',
+              null,
+              ' Name: ',
+              this.props.business.businessName
+            ),
+            _react2.default.createElement(
+              'div',
+              null,
+              ' Address: ',
+              this.props.business.businessAddress
+            ),
+            _react2.default.createElement(
+              'div',
+              null,
+              ' Phone: ',
+              this.props.business.businessPhone
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'left' },
+            ' ',
+            this.props.business.businessDescription,
+            ' '
+          )
         )
       );
     }
@@ -20236,7 +20258,7 @@ exports.default = List;
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+			value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -20266,131 +20288,122 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Nav = function (_React$Component) {
-	_inherits(Nav, _React$Component);
+			_inherits(Nav, _React$Component);
 
-	function Nav(props) {
-		_classCallCheck(this, Nav);
+			function Nav(props) {
+						_classCallCheck(this, Nav);
 
-		return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).call(this, props));
-	}
+						return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).call(this, props));
+			}
 
-	_createClass(Nav, [{
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement(
-				'nav',
-				{ className: 'navbar navbar-default' },
-				_react2.default.createElement(
-					'div',
-					{ className: 'container-fluid' },
-					_react2.default.createElement(
-						'form',
-						{ onSubmit: this.props.fetchBusinesses },
-						_react2.default.createElement(
-							'ul',
-							{ className: 'nav navbar-nav' },
-							_react2.default.createElement(
-								'li',
-								null,
-								_react2.default.createElement(
-									'a',
-									{ href: '#' },
-									'Fredx'
-								)
-							),
-							_react2.default.createElement(
-								'li',
-								null,
-								_react2.default.createElement(
-									'a',
-									null,
-									_react2.default.createElement(
-										'label',
-										null,
-										' Search: '
-									),
-									' ',
-									' ',
-									_react2.default.createElement('input', { value: this.props.searchParams.queryString, onChange: this.props.handleQueryChange })
-								)
-							),
-							_react2.default.createElement(
-								'li',
-								{ className: 'dropdown' },
-								_react2.default.createElement(
-									'a',
-									{ href: '#', 'class': 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
-									_react2.default.createElement(
-										'label',
-										null,
-										' Category: '
-									),
-									' ',
-									' ',
-									_react2.default.createElement(
-										'select',
-										{ value: this.props.searchParams.businessCategory, onChange: this.props.handleBusinessCategoryChange },
-										_react2.default.createElement(
-											'option',
-											{ value: 'Auto Repair' },
-											'Auto Repair'
-										),
-										_react2.default.createElement(
-											'option',
-											{ value: 'Home Repair' },
-											'Home Repair'
-										),
-										_react2.default.createElement(
-											'option',
-											{ value: 'HRSF72' },
-											'HRSF72'
-										),
-										_react2.default.createElement(
-											'option',
-											{ value: 'test' },
-											'Test'
-										)
-									)
-								)
-							),
-							_react2.default.createElement(
-								'li',
-								null,
-								_react2.default.createElement(
-									'a',
-									null,
-									_react2.default.createElement(
-										'label',
-										null,
-										' Location: '
-									),
-									' ',
-									' ',
-									_react2.default.createElement(
-										'select',
-										{ value: this.props.searchParams.location, onChange: this.props.handleLocationChange },
-										_react2.default.createElement(
-											'option',
-											{ value: 'San Francisco' },
-											'San Francisco'
-										),
-										_react2.default.createElement(
-											'option',
-											{ value: 'Oakland' },
-											'Oakland'
-										)
-									)
-								)
-							),
-							_react2.default.createElement('input', { type: 'submit', value: 'Search Businesses', className: 'btn btn-default' })
-						)
-					)
-				)
-			);
-		}
-	}]);
+			_createClass(Nav, [{
+						key: 'render',
+						value: function render() {
+									return _react2.default.createElement(
+												'nav',
+												{ className: 'navbar navbar-default' },
+												_react2.default.createElement(
+															'div',
+															{ className: 'container-fluid' },
+															_react2.default.createElement(
+																		'form',
+																		{ onSubmit: this.props.fetchBusinesses },
+																		_react2.default.createElement(
+																					'ul',
+																					{ className: 'nav navbar-nav' },
+																					_react2.default.createElement(
+																								'li',
+																								null,
+																								_react2.default.createElement(
+																											'a',
+																											null,
+																											_react2.default.createElement(
+																														'label',
+																														null,
+																														' Search: '
+																											),
+																											' ',
+																											' ',
+																											_react2.default.createElement('input', { value: this.props.searchParams.queryString, onChange: this.props.handleQueryChange })
+																								)
+																					),
+																					_react2.default.createElement(
+																								'li',
+																								{ className: 'dropdown' },
+																								_react2.default.createElement(
+																											'a',
+																											{ href: '#', 'class': 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+																											_react2.default.createElement(
+																														'label',
+																														null,
+																														' Category: '
+																											),
+																											' ',
+																											' ',
+																											_react2.default.createElement(
+																														'select',
+																														{ value: this.props.searchParams.businessCategory, onChange: this.props.handleBusinessCategoryChange },
+																														_react2.default.createElement(
+																																	'option',
+																																	{ value: 'Auto Repair' },
+																																	'Auto Repair'
+																														),
+																														_react2.default.createElement(
+																																	'option',
+																																	{ value: 'Home Repair' },
+																																	'Home Repair'
+																														),
+																														_react2.default.createElement(
+																																	'option',
+																																	{ value: 'HRSF72' },
+																																	'HRSF72'
+																														),
+																														_react2.default.createElement(
+																																	'option',
+																																	{ value: 'test' },
+																																	'Test'
+																														)
+																											)
+																								)
+																					),
+																					_react2.default.createElement(
+																								'li',
+																								null,
+																								_react2.default.createElement(
+																											'a',
+																											null,
+																											_react2.default.createElement(
+																														'label',
+																														null,
+																														' Location: '
+																											),
+																											' ',
+																											' ',
+																											_react2.default.createElement(
+																														'select',
+																														{ value: this.props.searchParams.location, onChange: this.props.handleLocationChange },
+																														_react2.default.createElement(
+																																	'option',
+																																	{ value: 'San Francisco' },
+																																	'San Francisco'
+																														),
+																														_react2.default.createElement(
+																																	'option',
+																																	{ value: 'Oakland' },
+																																	'Oakland'
+																														)
+																											)
+																								)
+																					),
+																					_react2.default.createElement('input', { type: 'submit', value: 'Search Businesses', className: 'btn btn-warning search' })
+																		)
+															)
+												)
+									);
+						}
+			}]);
 
-	return Nav;
+			return Nav;
 }(_react2.default.Component);
 
 exports.default = Nav;
@@ -37258,3 +37271,4 @@ _reactDom2.default.render(_react2.default.createElement(App, null), document.get
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=bundle.js.map

@@ -3,6 +3,7 @@ var SRC_DIR = path.join(__dirname, '/react-client/src');
 var DIST_DIR = path.join(__dirname, '/react-client/dist');
 
 module.exports = {
+  devtool: 'source-map',
   entry: `${SRC_DIR}/index.jsx`,
   output: {
     filename: 'bundle.js',

@@ -21,13 +21,14 @@ yelp.queryApi = function(obj) {
     .then(function (data) {
       var businesses = data.businesses;
       businesses.forEach((business) => {
-        console.log('obj term', obj.term);
+        console.log('business', business);
+        console.log('***********************')
         Business.create({
           businessName: business.name,
           businessPhone: business.phone,
           businessAddress: business.location.address,
           businessCity: business.location.city,
-          // businessPicture: business.snippet_image_url,
+          businessPictureUrl: business.image_url,
           businessType: obj.term
        }).then(function(result) {
           // console.log('stored following entry into Business Schema: ', result);     

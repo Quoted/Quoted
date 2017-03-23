@@ -32,7 +32,8 @@ yelp.queryApi = function(obj) {
           businessAddress: business.location.address,
           businessCity: business.location.city,
           businessPictureUrl: business.image_url,
-          businessType: obj.term
+          businessType: obj.term,
+          businessRatingUrl: business.rating_img_url
        }).then(function(result) {
           // console.log('stored following entry into Business Schema: ', result);     
         });       

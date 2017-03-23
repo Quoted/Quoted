@@ -7,6 +7,7 @@ var businessSchema = mongoose.Schema({
   businessCity: String,
   businessZip: String,
   businessRating: Number,
+  businessRatingUrl: String,
   businessPhone: Number,
   businessCell: Number,
   businessEmail: String,
@@ -35,7 +36,8 @@ var addBiz = function(businessName, businessPhone, businessType) {
     businessType: businessType,
     businessCity: 'San Francisco',
     businessAddress: 'Hack Reactor 6th Floor',
-    businessPictureUrl: 'https://raw.githubusercontent.com/Thinkful/bootcamp-finder/master/bootcamps/hack-reactor/logo.png'
+    businessPictureUrl: 'https://raw.githubusercontent.com/Thinkful/bootcamp-finder/master/bootcamps/hack-reactor/logo.png',
+    businessRatingUrl: 'https://s3-media1.fl.yelpcdn.com/assets/2/www/img/f1def11e4e79/ico/stars/v1/stars_5.png'
   }, function(err, data) {
     console.log('newsaved');
   });

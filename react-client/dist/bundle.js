@@ -35296,9 +35296,8 @@ var ListItem = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'col-md-3 col-lg-3' },
-            ' ',
             _react2.default.createElement('img', { className: 'businessImage', src: this.props.business.businessPictureUrl }),
-            ' '
+            _react2.default.createElement('img', { className: 'businessYelpRating', src: this.props.business.businessRatingUrl })
           ),
           _react2.default.createElement(
             'div',
@@ -35336,6 +35335,7 @@ var ListItem = function (_React$Component) {
 
   return ListItem;
 }(_react2.default.Component);
+// <div className="col-md-9 col-lg-9"> <img className="businessYelpRating" src={this.props.business.businessRatingUrl} /> </div>
 
 exports.default = ListItem;
 

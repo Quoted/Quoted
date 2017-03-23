@@ -19,7 +19,10 @@ class ListItem extends React.Component {
     return (            
       <div className="listItem container">
         <div className="row" >
-          <div className="col-md-3 col-lg-3"> <img className="businessImage" src={this.props.business.businessPictureUrl} /> </div>
+          <div className="col-md-3 col-lg-3"> 
+            <img className="businessImage" src={this.props.business.businessPictureUrl} /> 
+            <img className="businessYelpRating" src={this.props.business.businessRatingUrl} />
+          </div>
           <div className="col-md-9 col-lg-9"> 
             <div> Name: {this.props.business.businessName}</div>
             <div> Address: {this.props.business.businessAddress}</div>
@@ -31,5 +34,6 @@ class ListItem extends React.Component {
     )
   }
 }
+            // <div className="col-md-9 col-lg-9"> <img className="businessYelpRating" src={this.props.business.businessRatingUrl} /> </div>
 
 export default ListItem;

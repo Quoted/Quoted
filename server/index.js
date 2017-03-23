@@ -5,6 +5,9 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var path = require('path');
 var s3Router = require('./s3Router');
+var loadExampleData = require('./loadExampleData').loadExampleData;
+loadExampleData();
+
 
 var app = express();
 
@@ -37,7 +40,6 @@ app.get('/businesses', handler.checkBusinessData);
 app.post('/messages', handler.textBusinesses);
 app.post('/call', handler.callBusinesses)  
 app.post('/voice', handler.setVoiceMessage);
-
 
 //Deployment ports
 app.set('port', (process.env.PORT || 3000));

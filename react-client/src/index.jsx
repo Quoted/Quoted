@@ -20,19 +20,19 @@ class App extends React.Component {
   }
 
   handleQueryChange(event) {
-    event.preventDefault();    
+    // event.preventDefault();    
     console.log('queryString clicked');
     this.setState({queryString: event.target.value});
   }
 
   handleBusinessCategoryChange(event) {
-    event.preventDefault(); 
+    // event.preventDefault(); 
     console.log('businessCategory clicked');
     this.setState({businessCategory: event.target.value});
   }
 
   handleLocationChange(event) {
-    event.preventDefault(); 
+    // event.preventDefault(); 
     console.log('location clicked');
     this.setState({location: event.target.value});
   }

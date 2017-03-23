@@ -37271,4 +37271,3 @@ _reactDom2.default.render(_react2.default.createElement(App, null), document.get
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=bundle.js.map

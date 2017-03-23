@@ -23,6 +23,9 @@ yelp.queryApi = function(obj) {
       businesses.forEach((business) => {
         console.log('business', business);
         console.log('***********************')
+        if (business.location.address.length === 0) {
+          business.location.address = 'Serving ' + business.location.city;
+        }
         Business.create({
           businessName: business.name,
           businessPhone: business.phone,

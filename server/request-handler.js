@@ -98,15 +98,15 @@ exports.userLogout = function(req, res) {
 	})
 };
 
-
-
 exports.textBusinesses = function(req, res) {
   console.log('getting response from client'); 
   console.log('req body', req.body);
   var textInput = req.body.textInput
   console.log('textInput', textInput);
+  // if we are just getting an array from the client then we don't need to do the Business.find
+  // we'd just start on the forEach loop
   var businessType = "test" // req.body. businesstype
-
+  var location = "San Francisco" // req.body.    locationCity? 
 
   Business.find({businessType: businessType}, function(err, businesses){
     if (err) {
@@ -131,7 +131,7 @@ exports.textBusinesses = function(req, res) {
         });
       });
     }
-  });
+  }); // possibly limit here if we're still quering from db!
 };
 
 
@@ -144,9 +144,9 @@ exports.callBusinesses = function(req, res) {
       console.log('test businesses', businesses);
       businesses.forEach(function(biz) {
         client.calls.create({
-          // url: 'https://0eee99e4.ngrok.io/voice',
-          url: 'https://5eae2b54.ngrok.io/voice',
-          // url: 'http://demo.twilio.com/docs/voice.xml',
+          // FOR THE URL in the server in terminal write "./ngrok http 3000". Then paste the URL below followed by /voice
+          url: 'https://aeb2ec87.ngrok.io/voice', // CHANGE THIS!!!!
+          // url: 'http://demo.twilio.com/docs/voice.xml', // The twilio test
           to: biz.businessPhone,
           from: '4152001619',
         }, function (err, call) {
@@ -163,16 +163,29 @@ exports.callBusinesses = function(req, res) {
 };
 
 exports.setVoiceMessage = function(req, res) {
-  // var textInput = req.body.textInput;
-  // textInput = 'Get me a mechanic';
+  console.log('in set vm', req.body);
+  // var voiceRecording = 'https://s3-us-west-1.amazonaws.com/hrsf72-quoted-app/65005.mp3'; // req.body to get
+
+  // var voiceRecording = 'http://www.music.helsinki.fi/tmt/opetus/uusmedia/esim/a2002011001-e02.wav'; // WAV classical music in case we get too many errors
+  var voiceRecording = 'http://www.stephaniequinn.com/Music/Jazz%20Rag%20Ensemble%20-%2010.mp3'; // MP3 JAZZ
+  // var voiceRecording = 'http://demo.twilio.com/docs/classic.mp3'; 
+  // var voiceRecording = 'https://s3-us-west-1.amazonaws.com/hrsf72-quoted-app/75386.mp3'
+  // var voiceRecording = 'https://s3-us-west-1.amazonaws.com/hrsf72-quoted-app/90665.audio'
+  // var user = req.body.user;
+  var user = {
+    name: "edwin brower",
+    userCellPhone: 7703357571
+  }
 
   var twiml = new twilio.TwimlResponse();
-  // twiml.say('Hey ');
-  // twiml.play('http://demo.twilio.com/docs/classic.mp3');
-  // twiml.play('https://s3-us-west-1.amazonaws.com/hrsf72-quoted-app/75386.mp3');
-  // twiml.play('https://s3-us-west-1.amazonaws.com/hrsf72-quoted-app/90665.audio');
-  twiml.say('Hey do you want to hear classical music?');
-  twiml.play('http://www.music.helsinki.fi/tmt/opetus/uusmedia/esim/a2002011001-e02.wav'); // classical music in case we get too many errors
+  var quotedMessage = 'This message was sent through Quoted. Please call back ' + user.name + ' at ' + user.userCellPhone + ' that again is ' + user.userCellPhone;
+  // var quotedMessage = 'This message was sent through Quoted. Please call back the number provided within the message';
+  twiml.say(quotedMessage, 
+    {
+      'voice':'alice',
+      'language':'en-GB'
+    });
+  twiml.play(voiceRecording);
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
 };

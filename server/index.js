@@ -8,6 +8,7 @@ var s3Router = require('./s3Router');
 var loadExampleData = require('./loadExampleData').loadExampleData;
 loadExampleData();
 
+
 var app = express();
 
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -27,30 +28,6 @@ app.use('/s3', s3Router({
   bucket: 'hrsf72-quoted-app',
   ACL: 'public-read'
 }))
-
-
-// app.get('/user', function(req, res){ 
-//   var sessionCheck = req.session ? !!req.session.username : false;
-//   if (sessionCheck) {
-//     res.json(req.session.user);
-//   } else {
-//     res.json(null);
-//   }
-// });
-
-// app.post('/user', function(req, res){
-//   console.log('req ', req);
-//   var sessionCheck = req.session ? !!req.session.username : false;
-//   if (sessionCheck) {
-//     console.log('i\'m getting destroyed');
-//     req.session.destroy(function(){
-//       res.end();
-//     }); 
-//   } else {
-//     console.log('failed');
-//     res.end();
-//   }
-// });
 
 app.post('/user/signup', handler.userSignUp);
 app.post('/user/login', handler.userLogin);

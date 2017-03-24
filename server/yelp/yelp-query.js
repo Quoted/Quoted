@@ -23,13 +23,17 @@ yelp.queryApi = function(obj) {
       businesses.forEach((business) => {
         console.log('business', business);
         console.log('***********************')
+        if (business.location.address.length === 0) {
+          business.location.address = 'Serving ' + business.location.city;
+        }
         Business.create({
           businessName: business.name,
           businessPhone: business.phone,
           businessAddress: business.location.address,
           businessCity: business.location.city,
           businessPictureUrl: business.image_url,
-          businessType: obj.term
+          businessType: obj.term,
+          businessRatingUrl: business.rating_img_url
        }).then(function(result) {
           // console.log('stored following entry into Business Schema: ', result);     
         });       

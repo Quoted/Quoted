@@ -54,7 +54,7 @@ input[type='checkbox']:checked {
 
 .listItem {
   width: 100%;
-  height: 90px;
+  height: 100px;
   /*background-color: #ffa500; */
   /*background-color: light-blue;*/
   /*background-color: #4099FF;*/
@@ -77,6 +77,12 @@ select {
 .businessImage {
   height: 80%;
   width: 60%;
+}
+
+.businessYelpRating {
+  height: 75%;
+  width: 75%;
+  margin-top: 10px;
 }
 
 

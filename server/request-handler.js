@@ -167,10 +167,11 @@ exports.setVoiceMessage = function(req, res) {
   // var voiceRecording = 'https://s3-us-west-1.amazonaws.com/hrsf72-quoted-app/65005.mp3'; // req.body to get
 
   // var voiceRecording = 'http://www.music.helsinki.fi/tmt/opetus/uusmedia/esim/a2002011001-e02.wav'; // WAV classical music in case we get too many errors
-  var voiceRecording = 'http://www.stephaniequinn.com/Music/Jazz%20Rag%20Ensemble%20-%2010.mp3'; // MP3 JAZZ
+  // var voiceRecording = 'http://www.stephaniequinn.com/Music/Jazz%20Rag%20Ensemble%20-%2010.mp3'; // MP3 JAZZ
   // var voiceRecording = 'http://demo.twilio.com/docs/classic.mp3'; 
   // var voiceRecording = 'https://s3-us-west-1.amazonaws.com/hrsf72-quoted-app/75386.mp3'
   // var voiceRecording = 'https://s3-us-west-1.amazonaws.com/hrsf72-quoted-app/90665.audio'
+  var voiceRecording = 'https://s3-us-west-1.amazonaws.com/hrsf72-quoted-app/82894.wav' // manually converted using internet from webm to wav
   // var user = req.body.user;
   var user = {
     name: "edwin brower",

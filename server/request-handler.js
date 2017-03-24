@@ -145,7 +145,7 @@ exports.callBusinesses = function(req, res) {
       businesses.forEach(function(biz) {
         client.calls.create({
           // FOR THE URL in the server in terminal write "./ngrok http 3000". Then paste the URL below followed by /voice
-          url: 'https://aeb2ec87.ngrok.io/voice', // CHANGE THIS!!!!
+          url: 'http://79be030d.ngrok.io/voice', // CHANGE THIS!!!!
           // url: 'http://demo.twilio.com/docs/voice.xml', // The twilio test
           to: biz.businessPhone,
           from: '4152001619',
@@ -180,12 +180,12 @@ exports.setVoiceMessage = function(req, res) {
   var twiml = new twilio.TwimlResponse();
   var quotedMessage = 'This message was sent through Quoted. Please call back ' + user.name + ' at ' + user.userCellPhone + ' that again is ' + user.userCellPhone;
   // var quotedMessage = 'This message was sent through Quoted. Please call back the number provided within the message';
+  twiml.play(voiceRecording);
   twiml.say(quotedMessage, 
     {
       'voice':'alice',
       'language':'en-GB'
     });
-  twiml.play(voiceRecording);
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
 };

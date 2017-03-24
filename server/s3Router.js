@@ -46,7 +46,7 @@ function S3Router(options) {
       });
     });
   });
-
+  
   return router;
 }
 

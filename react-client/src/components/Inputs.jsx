@@ -36,9 +36,16 @@ class Inputs extends React.Component {
     })
 
     //Send data to server to send phone calls
-    // $.ajax({
-      // url: '/calls'
-    // })
+    $.ajax({
+      method: "POST",
+      url: '/call',
+      success: (results) => {
+        console.log('successfully sent call', results);
+      }, error: (err) => {
+        console.log('err in call', err);
+      }
+
+    })
 
 
   }

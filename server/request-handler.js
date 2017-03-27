@@ -104,10 +104,12 @@ exports.textBusinesses = function(req, res) {
   console.log('textInput', textInput);
   // if we are just getting an array from the client then we don't need to do the Business.find
   // we'd just start on the forEach loop
-  var businessType = "test" // req.body. businesstype
-  var location = "San Francisco" // req.body.    locationCity? 
+  // var businessType = "test" // req.body.businesstype
+  var businessType = req.body.businessCategory;
+  // var location = "San Francisco" // req.body.    locationCity? 
+  var location = req.body.location;
 
-  Business.find({businessType: businessType}, function(err, businesses){
+  Business.find({businessType: businessCategory}, function(err, businesses){
     if (err) {
       console.log(err);
     } else {
@@ -144,7 +146,7 @@ exports.callBusinesses = function(req, res) {
       businesses.forEach(function(biz) {
         client.calls.create({
           // FOR THE URL in the server in terminal write "./ngrok http 3000". Then paste the URL below followed by /voice
-          url: 'https://0539f9f1.ngrok.io/voice', // CHANGE THIS!!!!
+          url: 'https://0ab38556.ngrok.io/voice', // CHANGE THIS!!!!
           // url: 'http://demo.twilio.com/docs/voice.xml', // The twilio test
           to: biz.businessPhone,
           from: '4152001619',

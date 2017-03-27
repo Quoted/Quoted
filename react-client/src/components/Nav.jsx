@@ -19,11 +19,11 @@ class Nav extends React.Component {
 								 					<select value={this.props.searchParams.businessCategory} onChange={this.props.handleBusinessCategoryChange}>
 								            <option value="Auto Repair">Auto Repair</option>
 								            <option value="Home Repair">Home Repair</option>
-								            <option value="Computer Repair">Auto Repair</option>
-								            <option value="Phone Repair">Home Repair</option>
-								            <option value="Sewer Repair">Auto Repair</option>
+								            <option value="Computer Repair">Computer Repair</option>
+								            <option value="Phone Repair">Phone Repair</option>
+								            <option value="Sewer Repair">Sewer Repair</option>
 								            <option value="HRSF72">HRSF72</option>
-								            <option value="test">Test</option>
+								            <option value="test">test</option>
 								          </select>
 					    				</a>
 				    				</li>

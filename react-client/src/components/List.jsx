@@ -16,7 +16,7 @@ class List extends React.Component {
         </div> 
         {
           this.props.businesses.map((business) => {
-            return <ListItem business={business} key={business._id}/>
+            return <ListItem business={business} key={business._id} handleSelectedBusinesses={this.props.handleSelectedBusinesses} />
           })
         }
       </div>

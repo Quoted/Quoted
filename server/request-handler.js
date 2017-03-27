@@ -139,8 +139,12 @@ exports.textBusinesses = function(req, res) {
 
 
 exports.callBusinesses = function(req, res) {
-  console.log('trying to call'); 
-  Business.find({businessType: "test"}, function(err, businesses){
+  console.log('trying to call');
+
+  var businessType = req.body.businessCategory;
+  var location = req.body.location;
+
+  Business.find({"businessType": businessType, "businessCity": location}, function(err, businesses){
     if (err) {
       console.log(err);
     } else {

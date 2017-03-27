@@ -63,6 +63,10 @@ input[type='checkbox']:checked {
   display: table;
 }
 
+.listItemHighlight {
+  background-color: light-blue;  
+}
+
 /*
 This makes the text inside the Nav Select black instead of white 
 */

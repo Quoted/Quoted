@@ -12,6 +12,7 @@ class MainContent extends React.Component {
     super(props);
     this.state = { 
       businesses: [],
+      selectedBusinesses: [],
       businessCategory: 'Auto Repair',
       location: 'San Francisco',
       sendSMS: false,
@@ -31,6 +32,19 @@ class MainContent extends React.Component {
 
   handleTextInputChange(event) {
     this.setState({textInput: event.target.value});
+  }
+
+  handleSelectedBusinesses(prop) {
+    if (this.state.selectedBusinesses.indexOf(prop) === -1) {
+      var currentList = this.state.selectedBusinesses;
+      currentList.push(prop);
+      this.setState({ selectedBusinesses: currentList}, () => console.log(this.state.selectedBusinesses));
+    } else {
+      var indexOfSelectedBusiness = this.state.selectedBusinesses.indexOf(prop);
+      var dupData = this.state.selectedBusinesses.slice();
+      dupData.splice(indexOfSelectedBusiness, 1);
+      this.setState({selectedBusinesses: dupData}, () => console.log(this.state.selectedBusinesses));
+    }
   }
 
   handleCheckBox(event) {
@@ -118,7 +132,8 @@ class MainContent extends React.Component {
               sendInfo = {this.sendInfo.bind(this)}
               state={this.state} /> 
       <List businesses={this.state.businesses} 
-            fetchBusinesses={this.fetchBusinesses.bind(this)} /> 
+            fetchBusinesses={this.fetchBusinesses.bind(this)} 
+            handleSelectedBusinesses={this.handleSelectedBusinesses.bind(this)} /> 
     </div>)
   }
 }

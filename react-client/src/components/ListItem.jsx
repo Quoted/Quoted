@@ -4,20 +4,24 @@ import React from 'react';
 class ListItem extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-    };
+      selected: false,
 
+    }
   }
 
-  handleChange(e) {
-    this.setState({input: e.target.value});
-    console.log(e.target.value);
+  handleSelectedBusinessToggle (event) {
+    var self = this;
+    this.setState({selected: !this.state.selected}, () => self.props.handleSelectedBusinesses(event.target.value));
   }
 
   render() {
+    var style = {            
+      'backgroundColor': this.state.selected ? true : ''
+    };
+
     return (            
-      <div className="listItem container">
+      <div style={style} className="listItem container" onClick={() => this.props.handleSelectedBusinesses(this.props.business.businessName)} >
         <div className="row" >
           <div className="col-md-3 col-lg-3"> 
             <img className="businessImage" src={this.props.business.businessPictureUrl} /> 

@@ -45,27 +45,36 @@ class MainContent extends React.Component {
     console.log('Trying to send info', this.state.textInput);
 
     //Send data to server to send text messages
-    $.ajax({
-      method: "POST",
-      url: '/messages',
-      data: {textInput: this.state.textInput},
-      success: (results) => {
-        console.log('sucessfuly sent message', results);
-      }, error: (err) => {  
-        console.log('err recieved', err);
-      }
-    })
+    if (this.state.sendSMS === true){
+      $.ajax({
+        method: "POST",
+        url: '/messages',
+        data: { textInput: this.state.textInput,
+                business: this.state.businesses,
+                businessCategory: this.state.businessCategory,
+                location: this.state.location},
+        success: (results) => {
+          console.log('sucessfuly sent message', results);
+        }, error: (err) => {  
+          console.log('err recieved', err);
+        }
+      })
+    }
 
     //Send data to server to send phone calls
-    $.ajax({
-      method: "POST",
-      url: '/call',
-      success: (results) => {
-        console.log('successfully sent call', results);
-      }, error: (err) => {
-        console.log('err in call', err);
-      }
-    })
+    if (this.state.sendPhone === true) {
+      $.ajax({
+        method: "POST",
+        url: '/call',
+        data: { business: this.state.businesses
+        },
+        success: (results) => {
+          console.log('successfully sent call', results);
+        }, error: (err) => {
+          console.log('err in call', err);
+        }
+      })
+    }
   }
 
   fetchBusinesses(event) {

@@ -27,7 +27,7 @@ app.use(session({
 //router for S3
 app.use('/s3', s3Router({
   bucket: 'hrsf72-quoted-app',
-  ACL: 'public-read'
+  ACL: 'public-read-write'
 }))
 
 
@@ -103,7 +103,6 @@ app.post('/signup', function (req, res) {
 app.post('/user/signup', handler.userSignUp);
 app.post('/user/login', handler.userLogin);
 app.get('/user/logout', handler.userLogout);
-// app.post('/businesses', handler.loadBusinessData, handler.queryYelp, handler.loadBusinessData);
 app.post('/businesses', handler.checkBusinessData);
 app.get('/businesses', handler.checkBusinessData); 
 

@@ -11,6 +11,7 @@ function getSignedUrl(file) {
   let queryString = '?objectName=' + file.id + '&contentType=' + encodeURIComponent(file.type);
   return fetch('/s3/sign' + queryString)
   .then((response) => {
+    console.log('response from getSignedUrl: ', response);
     return response.json();
   })
   .catch((err) => {
@@ -37,7 +38,7 @@ export function S3Upload(fileInfo) { //parameters: { type, data, id }
   return new Promise((resolve, reject) => {
     getSignedUrl(fileInfo)
     .then((s3Info) => {
-      console.log('s3 Info: ' + s3Info);
+      console.dir('s3 Info: ' + s3Info);
       // upload to S3
       var xhr = createCORSRequest('PUT', s3Info.signedUrl);
 
@@ -52,7 +53,7 @@ export function S3Upload(fileInfo) { //parameters: { type, data, id }
       };
 
       xhr.setRequestHeader('Content-Type', fileInfo.type);
-      xhr.setRequestHeader('x-amz-acl', 'public-read');
+      xhr.setRequestHeader('x-amz-acl', 'public-read-write');
 
       return xhr.send(fileInfo.data);
     })

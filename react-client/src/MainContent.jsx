@@ -12,34 +12,64 @@ class MainContent extends React.Component {
     super(props);
     this.state = { 
       businesses: [],
-      queryString: '',
-      businessCategory: '',
-      location: ''
+      businessCategory: 'Auto Repair',
+      location: 'San Francisco',
+      sendSMS: false,
+      sendPhone: false,
+      textInput: '',
+      recordingPublicUrl: ''
     }
-    // var this.fetchBusinesses = this.fetchBusinesses.bind(this);
-  }
-
-  handleQueryChange(event) {
-    // event.preventDefault();    
-    console.log('queryString clicked');
-    this.setState({queryString: event.target.value});
   }
 
   handleBusinessCategoryChange(event) {
-    // event.preventDefault(); 
-    console.log('businessCategory clicked');
     this.setState({businessCategory: event.target.value});
   }
 
   handleLocationChange(event) {
-    // event.preventDefault(); 
-    console.log('location clicked');
     this.setState({location: event.target.value});
+  }
+
+  handleTextInputChange(event) {
+    this.setState({textInput: event.target.value});
+  }
+
+  handleCheckBox(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({[name]: value});
+    console.log('name is: ' + name + '; value is: ' + value);
+  }
+
+  sendInfo() {
+    console.log('Trying to send info', this.state.textInput);
+
+    //Send data to server to send text messages
+    $.ajax({
+      method: "POST",
+      url: '/messages',
+      data: {textInput: this.state.textInput},
+      success: (results) => {
+        console.log('sucessfuly sent message', results);
+      }, error: (err) => {  
+        console.log('err recieved', err);
+      }
+    })
+
+    //Send data to server to send phone calls
+    $.ajax({
+      method: "POST",
+      url: '/call',
+      success: (results) => {
+        console.log('successfully sent call', results);
+      }, error: (err) => {
+        console.log('err in call', err);
+      }
+    })
   }
 
   fetchBusinesses(event) {
     let params = {};
-    params.term = this.state.queryString || 'test';
     params.category = this.state.businessCategory || 'test';
     params.location = this.state.location || 'San Francisco';
     console.log('fetchBusiness params: ', params);
@@ -66,15 +96,18 @@ class MainContent extends React.Component {
     return (
     <div>
       <Nav  fetchBusinesses={this.fetchBusinesses.bind(this)} 
-            handleQueryChange={this.handleQueryChange.bind(this)} 
             handleBusinessCategoryChange={this.handleBusinessCategoryChange.bind(this)} 
             handleLocationChange={this.handleLocationChange.bind(this)} 
             searchParams={this.state} />
       <div className="page-header">
       <h1> <b> Quoted </b></h1>
       </div>
-      <Inputs />
-      <List businesses={this.state.businesses} fetchBusinesses={this.fetchBusinesses.bind(this)}/> 
+      <Inputs handleTextInputChange = {this.handleTextInputChange.bind(this)}
+              handleCheckBox = {this.handleCheckBox.bind(this)}
+              sendInfo = {this.sendInfo.bind(this)}
+              state={this.state} /> 
+      <List businesses={this.state.businesses} 
+            fetchBusinesses={this.fetchBusinesses.bind(this)} /> 
     </div>)
   }
 }

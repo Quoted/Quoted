@@ -98,7 +98,6 @@ exports.userLogout = function(req, res) {
 };
 
 exports.textBusinesses = function(req, res) {
-  res.end();
   console.log('getting response from client'); 
   console.log('req body', req.body);
   var textInput = req.body.textInput

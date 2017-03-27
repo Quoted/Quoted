@@ -20,7 +20,20 @@ describe('', function() {
       expect(true).to.be.true;
       done();
     });
+    // it('should have some number of businesses in db', function(done) {
+    //   expect(Business.count({})).to.equal(0);
+    //   done();
+    // });
+    // it('does something', function(done) {
+    //   request(app).post('/businesses')
+    // });
   });
+
+
+
+
+
+
 
   // beforeEach(function(done) {
   //   // Log out currently signed in user

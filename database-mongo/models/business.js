@@ -19,10 +19,6 @@ var businessSchema = mongoose.Schema({
   businessDescription: String
 });
 
-businessSchema.pre('save', function(next) {
-  next();
-});
-
 var Business = mongoose.model('Business', businessSchema);
 
 //CLASS DATA
@@ -71,6 +67,8 @@ addBiz('Mike Liao', 4083182027);
 // addBiz("Eugene Song", 7143389937);
 // addBiz("Huan Chen", 4157419464);
 
+// addBiz("Eugene", 9177503172);
+// addBiz("Kyle Bradford", 8016022123);
 // addBiz('Miss Tiff Lin', 6505150237);
 
 module.exports = Business;

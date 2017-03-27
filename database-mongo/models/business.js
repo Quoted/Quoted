@@ -44,9 +44,9 @@ var addBiz = function(businessName, businessPhone, businessType) {
 }
 
 // Test Data
-addBiz('Edwin', 7703357571, 'test');
-addBiz('Han', 5104568837, 'test');
-addBiz('Mike', 4083182027, 'test');
+// addBiz('Edwin', 7703357571, 'test');
+// addBiz('Han', 5104568837, 'test');
+// addBiz('Mike', 4083182027, 'test');
 addBiz('Jason', 6267168334, 'test');
 
 // Test Class Data

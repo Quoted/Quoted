@@ -19,7 +19,6 @@ class List extends React.Component {
             return <ListItem business={business} key={business._id}/>
           })
         }
-        <button onClick={this.props.fetchBusinesses}> Refresh </button>  
       </div>
     )
 

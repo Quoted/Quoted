@@ -8,8 +8,6 @@ import Webcam from './Webcam.react.jsx';
 const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
                         navigator.mozGetUserMedia || navigator.msGetUserMedia);
 
-// const mediaSource = new MediaSource();
-
 class SoundIcon extends React.Component {
   constructor(props) {
     super(props);
@@ -52,7 +50,7 @@ class SoundIcon extends React.Component {
       if (this.state.recordVideo !== null) {
         this.state.recordVideo.clearRecordedData();
       }
-      this.state.recordVideo = RecordRTC(stream, {type: 'audio', mimeType: 'audio/mp3'});
+      this.state.recordVideo = RecordRTC(stream, {type: 'audio', mimeType: 'audio/webm'});
       this.state.recordVideo.startRecording();
     });
   }
@@ -60,7 +58,7 @@ class SoundIcon extends React.Component {
   stopRecord() {
     this.state.recordVideo.stopRecording(() => {
       let params = {
-        type: 'audio/mp3',
+        type: 'audio/webm',
         data: this.state.recordVideo.blob,
         id: Math.floor(Math.random()*90000) + 10000
       }
@@ -74,9 +72,10 @@ class SoundIcon extends React.Component {
 
     S3Upload(params)
     .then((success) => {
-      console.log('enter then statement')
+      console.log('enter then statement');
       if(success) {
-        console.log(success)
+        // this.setState({recordingPublicUrl: response.publicUrl});
+        // console.log(this.props.recordingPublicUrl);
         this.setState({ uploadSuccess: true, uploading: false });
       }
     }, (error) => {
@@ -88,9 +87,7 @@ class SoundIcon extends React.Component {
   playRecord() {
     var self = this;
     console.log(self.state.recordVideo.blob);
-    var superBuffer = new Blob(self.state.recordVideo.blob, { type: 'audio/mp3',
-        bufferSize:  16384 
-      });
+    var superBuffer = new Blob(self.state.recordVideo.blob, { type: 'audio/webm'});
     this.setState({url: window.URL.createObjectURL(superBuffer)});
   }
 
@@ -111,11 +108,10 @@ class SoundIcon extends React.Component {
 
     return (
       <div>
-        {/*<div><Webcam src={this.state.src}/></div>*/}
         {this.state.uploading ? <div>Uploading...</div> : null}
-        <img style={style} onClick={this.handlePress} src="assets/soundIcon.png" />  
-        <div><button onClick={this.uploadRecord} className="btn btn-primary">Upload Record</button></div>
-        {/*<div><button onClick={this.playRecord} className="btn btn-primary">Play Record</button></div>*/}
+        {this.state.uploadSuccess ? <div>Uploaded</div> : null}        
+        <img style={style} onClick={this.handlePress} src="assets/soundIcon.png" />  <br/>
+        <button onClick={this.uploadRecord} className="btn btn-primary">Upload Record</button>
       </div>
     )
   }

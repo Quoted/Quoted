@@ -13,12 +13,6 @@ class Nav extends React.Component {
 	    		<div className="container-fluid">
 				    <form onSubmit={this.props.fetchBusinesses}>
 				    		<ul className="nav navbar-nav">
-				    				<li>
-				    					<a>
-					    					<label> Search: </label> {' '}
-				    						<input value={this.props.searchParams.queryString} onChange={this.props.handleQueryChange} />
-				    					</a> 
-				    				</li>
 				    				<li className="dropdown">
 				    					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 					    					<label> Category: </label> {' '}
@@ -41,7 +35,6 @@ class Nav extends React.Component {
 				    				</li>
 				    				<input type="submit" value="Search Businesses" className="btn btn-warning search"/>    				
 				  			</ul>
-
 				    </form>
 	  			</div>
 	  		</nav>

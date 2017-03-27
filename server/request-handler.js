@@ -22,14 +22,13 @@ exports.createSalt = function() {
 
 
 exports.checkBusinessData = function(req, res) {
-	var term = req.body.term;
-	var category = req.body.category;
-	var location = req.body.location;
-	var geolocationLat = req.body.geolocationLat;
-	var geolocationLong = req.body.geolocationLong;	
-
-  console.log('category in request handelr', category);
-  console.log('location in request handelr', location);
+  var category = req.body.category;
+  var location = req.body.location;
+	
+  //currently not being used
+  // var term = req.body.term;
+	// var geolocationLat = req.body.geolocationLat;
+	// var geolocationLong = req.body.geolocationLong;	
 
   Business.find({"businessType": category, "businessCity": location})
 		.exec(function(err, result) {
@@ -145,7 +144,7 @@ exports.callBusinesses = function(req, res) {
       businesses.forEach(function(biz) {
         client.calls.create({
           // FOR THE URL in the server in terminal write "./ngrok http 3000". Then paste the URL below followed by /voice
-          url: 'http://79be030d.ngrok.io/voice', // CHANGE THIS!!!!
+          url: 'https://0539f9f1.ngrok.io/voice', // CHANGE THIS!!!!
           // url: 'http://demo.twilio.com/docs/voice.xml', // The twilio test
           to: biz.businessPhone,
           from: '4152001619',

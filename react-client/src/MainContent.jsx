@@ -50,7 +50,7 @@ class MainContent extends React.Component {
         method: "POST",
         url: '/messages',
         data: { textInput: this.state.textInput,
-                business: this.state.businesses,
+                businesses: this.state.businesses,
                 businessCategory: this.state.businessCategory,
                 location: this.state.location},
         success: (results) => {
@@ -66,7 +66,9 @@ class MainContent extends React.Component {
       $.ajax({
         method: "POST",
         url: '/call',
-        data: { business: this.state.businesses
+        data: { businesses: this.state.businesses,
+                buusinessCategory: this.state.businessCategory,
+                location: this.state.location
         },
         success: (results) => {
           console.log('successfully sent call', results);

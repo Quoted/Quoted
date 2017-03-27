@@ -104,9 +104,6 @@ app.post('/user/signup', handler.userSignUp);
 app.post('/user/login', handler.userLogin);
 app.get('/user/logout', handler.userLogout);
 app.post('/businesses', handler.checkBusinessData);
-app.get('/businesses', handler.checkBusinessData); 
-
-
 app.post('/messages', handler.textBusinesses);
 app.post('/call', handler.callBusinesses)  
 app.post('/voice', handler.setVoiceMessage);

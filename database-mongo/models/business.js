@@ -59,7 +59,7 @@ addBiz('Mike Liao', 4083182027);
 // // Class Data
 // addBiz("Dan McSweeney", 9174637450);
 // addBiz("Gabriel Certeza", 4156046691);
-// addBiz("Dario Arteaga", 6282022873);
+addBiz("Dario Arteaga", 6282022873);
 // addBiz("Kai Yu", 5107893730);
 // addBiz("Jason An", 9255861585);
 // addBiz("Billy Won", 4154179136);
@@ -70,7 +70,9 @@ addBiz('Mike Liao', 4083182027);
 // addBiz("Tim Nguyen", 3232290550);
 // addBiz("Eugene Song", 7143389937);
 // addBiz("Huan Chen", 4157419464);
-
+// addBiz("Gary Wong", 4156974834);
+// addBiz("Duy ", );
+// addBiz("Tayo :)", );
 // addBiz('Miss Tiff Lin', 6505150237);
 
 module.exports = Business;

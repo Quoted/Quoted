@@ -129,3 +129,12 @@ select {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+@media (min-width: 768px){
+   .navbar-nav{
+       float:none;
+       margin: 0 auto;
+       display: table;
+       table-layout: fixed;
+   }
+}

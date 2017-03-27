@@ -19,6 +19,9 @@ class Nav extends React.Component {
 								 					<select value={this.props.searchParams.businessCategory} onChange={this.props.handleBusinessCategoryChange}>
 								            <option value="Auto Repair">Auto Repair</option>
 								            <option value="Home Repair">Home Repair</option>
+								            <option value="Computer Repair">Auto Repair</option>
+								            <option value="Phone Repair">Home Repair</option>
+								            <option value="Sewer Repair">Auto Repair</option>
 								            <option value="HRSF72">HRSF72</option>
 								            <option value="test">Test</option>
 								          </select>
@@ -30,6 +33,7 @@ class Nav extends React.Component {
 								 					<select value={this.props.searchParams.location} onChange={this.props.handleLocationChange}>
 								            <option value="San Francisco">San Francisco</option>
 								            <option value="Oakland">Oakland</option>
+														<option value="San Jose">San Jose</option>								            
 								          </select>    					
 					    				</a>
 				    				</li>

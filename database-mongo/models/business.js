@@ -27,7 +27,7 @@ var Business = mongoose.model('Business', businessSchema);
 
 //CLASS DATA
 var addBiz = function(businessName, businessPhone, businessType) {
-  if (arguments.length === 2) {
+  if (arguments.length <= 2) {
     businessType = 'HRSF72';
   }
   Business.create({
@@ -47,7 +47,7 @@ var addBiz = function(businessName, businessPhone, businessType) {
 // addBiz('Edwin', 7703357571, 'test');
 // addBiz('Han', 5104568837, 'test');
 // addBiz('Mike', 4083182027, 'test');
-addBiz('Jason', 6267168334, 'test');
+// addBiz('Jason', 6267168334, 'test');
 
 // Test Class Data
 addBiz('Jason Kuo', 6267168334);

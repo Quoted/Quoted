@@ -105,11 +105,13 @@ exports.textBusinesses = function(req, res) {
   // if we are just getting an array from the client then we don't need to do the Business.find
   // we'd just start on the forEach loop
   // var businessType = "test" // req.body.businesstype
-  var businessType = req.body.businessCategory;
   // var location = "San Francisco" // req.body.    locationCity? 
+  
+  //change this so that we're sending text to req.body.businesses
+  var businessType = req.body.businessCategory;
   var location = req.body.location;
 
-  Business.find({businessType: businessCategory}, function(err, businesses){
+  Business.find({businessType: businessType, businessCity: location}, function(err, businesses){
     if (err) {
       console.log(err);
     } else {
@@ -172,7 +174,7 @@ exports.setVoiceMessage = function(req, res) {
   // var voiceRecording = 'http://demo.twilio.com/docs/classic.mp3'; 
   // var voiceRecording = 'https://s3-us-west-1.amazonaws.com/hrsf72-quoted-app/75386.mp3'
   // var voiceRecording = 'https://s3-us-west-1.amazonaws.com/hrsf72-quoted-app/90665.audio'
-  var voiceRecording = 'https://s3-us-west-1.amazonaws.com/hrsf72-quoted-app/82894.wav' // manually converted using internet from webm to wav
+  var voiceRecording = 'https://s3-us-west-1.amazonaws.com/hrsf72-quoted-app/DemoAudioRecording.wav' // manually converted using internet from webm to wav
   // var user = req.body.user;
   var user = {
     name: "edwin brower",

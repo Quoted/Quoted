@@ -67,7 +67,7 @@ class MainContent extends React.Component {
         method: "POST",
         url: '/call',
         data: { businesses: this.state.businesses,
-                buusinessCategory: this.state.businessCategory,
+                businessCategory: this.state.businessCategory,
                 location: this.state.location
         },
         success: (results) => {

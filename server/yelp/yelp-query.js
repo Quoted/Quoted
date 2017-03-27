@@ -21,8 +21,6 @@ yelp.queryApi = function(obj) {
     .then(function (data) {
       var businesses = data.businesses;
       businesses.forEach((business) => {
-        console.log('business', business);
-        console.log('***********************')
         if (business.location.address.length === 0) {
           business.location.address = 'Serving ' + business.location.city;
         }

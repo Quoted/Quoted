@@ -59,7 +59,7 @@ addBiz('Mike Liao', 4083182027);
 // // Class Data
 // addBiz("Dan McSweeney", 9174637450);
 // addBiz("Gabriel Certeza", 4156046691);
-// addBiz("Dario Arteaga", 6282022873);
+addBiz("Dario Arteaga", 6282022873);
 // addBiz("Kai Yu", 5107893730);
 // addBiz("Jason An", 9255861585);
 // addBiz("Billy Won", 4154179136);

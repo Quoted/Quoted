@@ -98,6 +98,7 @@ exports.userLogout = function(req, res) {
 };
 
 exports.textBusinesses = function(req, res) {
+  res.end();
   console.log('getting response from client'); 
   console.log('req body', req.body);
   var textInput = req.body.textInput
@@ -139,8 +140,17 @@ exports.textBusinesses = function(req, res) {
 
 
 exports.callBusinesses = function(req, res) {
-  console.log('trying to call'); 
-  Business.find({businessType: "test"}, function(err, businesses){
+  console.log('trying to call');
+
+
+  var businessType = req.body.businessCategory;
+  var location = req.body.location;
+  console.log('request body', req.body);
+  console.log('businessType', businessType);
+  console.log('location', location);
+
+
+  Business.find({businessType: businessType, businessCity: location}, function(err, businesses){
     if (err) {
       console.log(err);
     } else {

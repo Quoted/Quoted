@@ -72,5 +72,8 @@ addBiz('Mike Liao', 4083182027);
 // addBiz("Huan Chen", 4157419464);
 
 // addBiz('Miss Tiff Lin', 6505150237);
+// addBiz("Gary Wong", 4156974834);
+// addBiz("Tayo Jolaosho", 9177553154);
+// addBiz("Eugene", 9177503172);
 
 module.exports = Business;

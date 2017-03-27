@@ -8,40 +8,6 @@ class Inputs extends React.Component {
   constructor(props) {
     super(props);
   }
-
-  // handleTextChange(e) {
-  //   this.setState({textInput: e.target.value});
-  //   // console.log(e.target.value);
-  //   console.log(this.state.textInput);
-  // }
-
-  // sendInfo() {
-  //   console.log('Trying to send info', this.state.textInput);
-
-  //   //Send data to server to send text messages
-  //   $.ajax({
-  //     method: "POST",
-  //     url: '/messages',
-  //     data: {textInput: this.state.textInput},
-  //     success: (results) => {
-  //       console.log('sucessfuly sent message', results);
-  //     }, error: (err) => {  
-  //       console.log('err recieved', err);
-  //     }
-  //   })
-
-  //   //Send data to server to send phone calls
-  //   $.ajax({
-  //     method: "POST",
-  //     url: '/call',
-  //     success: (results) => {
-  //       console.log('successfully sent call', results);
-  //     }, error: (err) => {
-  //       console.log('err in call', err);
-  //     }
-  //   })
-  // }
-
   render() {
     return (                  
       <div className="row inputs"> 
